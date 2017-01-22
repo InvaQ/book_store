@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :books
   resources :orders
+  resources :carts
+  resources :line_items
 
 
 
