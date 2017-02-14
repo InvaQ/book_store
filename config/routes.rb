@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root to:"home#home"
   
-  get 'catalog/index'
-
+  resources :catalog, only: [:index, :show]
 
   resources :books
   resources :orders

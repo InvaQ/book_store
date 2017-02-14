@@ -6,7 +6,13 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :authors
 
   validates :title, :description, presence: true
-  validates :price, numericality: {greater_than_or_equel_to: 0.01}
+  validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :title, uniqueness: true
   
+
+
+  def get_author_names
+    self.authors.collect {|author| author.name }.join(', ')
+  end
+  #books.select('books.id, books.title, count(categorizations.id) as count').group('books.id, books.title')
 end

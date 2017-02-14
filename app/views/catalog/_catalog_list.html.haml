@@ -1,0 +1,20 @@
+- @books.each do |book|
+  .col-xs-6.col-sm-3
+    .general-thumb-wrap
+      .thumbnail.general-thumbnail
+        %img.img-shadow.general-thumbnail-img 
+          = image_tag(book.pictures.first.image_url)
+        .thumb-hover
+          .general-thumb-link-wrap
+            %a.thumb-hover-link{href: "#"}
+              %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+            %a.thumb-hover-link{href: "#"}
+              %i.fa.fa-shopping-cart.thumb-icon
+    .general-thumb-info{"data-id" => book.id}
+      %p.general-title 
+        =book.title
+      %p.font-16.in-gold-500 
+        =book.price
+      %span.divider-sm
+      %p.in-grey-600.small
+        =book.get_author_names            

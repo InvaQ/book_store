@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    .general-main-container      
+      %main.container
+        .text-center
+          %h3.general-login-title Set new password
+        %form.general-form
+          .form-group.mb-30
+            %label.control-label.font-weight-light{for: "password"} Type a new Password
+            %input#password.form-control{name:"password", type: "password", placeholder: "Type a new Password"}
+          .form-group.mb-40
+            %label.control-label.font-weight-light{for: "confirmPassword"} Confirm Password
+            %input#confirmPassword.form-control{name:"password", type: "password", placeholder: "Confirm Password"}
+          %button.btn.btn-default.center-block.mb-20 Change
+    

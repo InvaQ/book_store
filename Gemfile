@@ -14,11 +14,24 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
-gem 'devise'
 gem "haml-rails"
 gem 'pg'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
+
+
+
+
+
+#authentication
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'cancancan'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -30,9 +43,15 @@ gem 'bootstrap-sass'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '~> 3.1'
-  gem 'database_cleaner'
+  
   gem 'capybara'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'ffaker'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', require: false
 end
 
 group :development do
