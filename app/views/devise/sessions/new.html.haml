@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %main.container.general-main-wrap
+      .text-center
+        %h3.general-login-title Log In
+        %a.general-login-icon{href: "#"}
+          %i.fa.fa-facebook-official
+        %p.general-login-text or
+      %form.general-form
+        .form-group.mb-30
+          %label.control-label.font-weight-light{for: "email"} Enter Email
+          %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
+        .form-group.mb-30
+          %label.control-label.font-weight-light{for: "password"} Password
+          %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
+          %a.help-block.in-gold-500{href: "#"} Forgot password?
+        .form-group.mb-30
+          %label.control-label.font-weight-light{for: "confirm"} Confirm Password
+          %input#confirm.form-control{name:"confirm", type: "password", placeholder: "Confirm Password"}
+        .form-group.checkbox.text-center.mb-30
+          %label.font-weight-light.pl-0
+            %input.checkbox-input{type: "checkbox", hidden: "true"}
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text Remember me
+        .text-center
+          %button.btn.btn-default.mb-20 Back to Store
+      %p.general-sign-text.text-center
+        Don’t have an Account?
+      .in-gold-500
+        = link_to "Sign Up", new_user_registration_path
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

@@ -14,22 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function () {
-	$('a.load-more').click(function (e) {
-		e.preventDefault();
-		
-		var last_id = $('.record').attr('data-id');
-
-		$.ajax({
-			type: "GET",
-			url: $(this).attr('href'),
-			data: { id: last_id },
-			dataType: "script",
-
-			success: function () {
-				$('.load-more').show;
-			}
-		});
-	});
-});

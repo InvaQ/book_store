@@ -14,24 +14,33 @@ end
 
 
 Book.create!(title: 'Real-Life Responsive Web Design', description: 'Smart front-end techniques and design 
-  patterns derived from real-life responsive projects', height: 12, width: 10, depth: 10, publication: 2011, price: 49.55)
+  patterns derived from real-life responsive projects', height: 12, width: 10, depth: 10, publication: 2011, price: 49.55, materials: 'Hardcove, glossy paper')
 
 Book.create!(title: 'Learning Python, 5th Edition', description: 'techniques and design 
-  patterns derived from real-life responsive projects', height: 10, width: 19, depth: 11, publication: 2017, price: 47.75)
+  patterns derived from real-life responsive projects', height: 10, width: 19, depth: 11, publication: 2017, price: 47.75, materials: 'Hardcove, glossy paper')
 
-Book.create!(title: 'The Self-Taught Programmer', description: 'Smart front-end ', height: 9, width: 9, depth: 9, publication: 2001, price: 49.99)
+Book.create!(title: 'The Self-Taught Programmer', description: 'Smart front-end ', height: 9, width: 9, depth: 9, publication: 2001, price: 49.99, materials: 'Hardcove, glossy paper')
 
-Book.create!(title: 'Cracking the Coding', description: 'Patterns derived from real-life responsive projects', height: 12, width: 15, depth: 10, publication: 1998, price: 30.00)
+Book.create!(title: '1111', description: '11', height: 12, width: 15, depth: 10, publication: 1998, price: 1.00, materials: 'Hardcove, glossy paper')
 
+Book.create!(title: '222222', description: '2', height: 12, width: 15, depth: 10, publication: 1998, price: 2.00, materials: 'Hardcove, glossy paper')
 
-
-Book.all.each do |book|
-  book.authors.create!(first_name: 'Vitaly',last_name: 'Friedman')
-  book.pictures.create!(image_url: '1.jpg')
-end
+Book.create!(title: '33333', description: '2', height: 12, width: 15, depth: 10, publication: 1998, price: 3.00, materials: 'Hardcove, glossy paper')
 Category.create!(name: 'Mobile Development')
 Category.create!(name: 'Photo')
 Category.create!(name: 'Web Design')
+
+
+Book.all.each_with_index do |book, index|
+  
+  book.authors.create!(first_name: 'Vitaly',last_name: 'Friedman')
+  book.pictures.create!(image_url: "#{index+1}.jpg")
+  3.times do
+  book.pictures.create!(image_url: "22.jpg")
+  end
+  book.categories << Category.first if index.even?    
+end
+
 #Author.create!(first_name: 'Vitaly',last_name: 'Friedman')
 #Author.create!(first_name: 'Daniel ',last_name: 'Mall')
 #Author.create!(first_name: 'Gayle',last_name: 'Laakmann')

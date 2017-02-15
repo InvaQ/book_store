@@ -4,11 +4,8 @@ class CatalogController < ApplicationController
 
   def index
     #byebug
-    if params[:id]
-      @books = Book.where('id > ?', params[:id]).limit(4)
-    else
-      @books = Book.limit(4)
-    end.order("#{sort_column} #{sort_direction}")
+    @books = Book.page(params[:page] || 1).per(4)    
+    .order("#{sort_column} #{sort_direction}")
 
     respond_to do |format|
       format.html

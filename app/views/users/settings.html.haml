@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %main.container
+      %h1.general-title-margin Settings
+      %ul.nav.nav-tabs.mb-20{role: "tablist"}
+        %li.mb-10.active{role: "presentation"}
+          %a{href: "#address", 'aria-controls': "address", role: "tab", 'data-toggle': "tab"} Address
+        %li.mb-10{role: "presentation"}
+          %a{href: "#privacy", 'aria-controls': "privacy", role: "tab", 'data-toggle': "tab"} Privacy
+      .tab-content
+        #address.tab-pane.fade.in.active{role: "tabpanel"}
+          .general-main-wrap
+            %form
+              .hidden-xs.hidden-sm
+                .row
+                  .col-md-5
+                    %h3.general-subtitle.mt-0 Billing Address
+                  .col-md-5.col-md-offset-1
+                    %h3.general-subtitle.mt-0 Shipping Address
+              .row
+                =render 'billing_address'
+                =render 'shipping_address'
+        #privacy.tab-pane.fade{role: "tabpanel"}
+          =render 'privacy'
+    
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

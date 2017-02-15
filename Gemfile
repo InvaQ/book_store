@@ -18,7 +18,7 @@ gem "haml-rails"
 gem 'pg'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
-
+gem 'kaminari'
 
 
 

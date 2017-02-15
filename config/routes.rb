@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  get '/users/:id', to: 'users#settings', as: 'settings'
+
   root to:"home#home"
   
   resources :catalog, only: [:index, :show]
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :carts
   resources :line_items
+
 
 
 

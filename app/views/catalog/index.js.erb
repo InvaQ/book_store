@@ -1,1 +1,3 @@
-$('.row.pagination').append('<%= escape_javascript(render 'catalog_list') %>')
+$('.row.pagination').append('<%= escape_javascript(render 'catalog_list') %>');
+$('#load_more_link').replaceWith("<%= escape_javascript(link_to_next_page(@books, 
+	'Load More', remote: true, id: 'load_more_link', class: 'btn btn-primary'))%>");
