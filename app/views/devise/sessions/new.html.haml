@@ -13,29 +13,32 @@
         %a.general-login-icon{href: "#"}
           %i.fa.fa-facebook-official
         %p.general-login-text or
-      %form.general-form
-        .form-group.mb-30
-          %label.control-label.font-weight-light{for: "email"} Enter Email
-          %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
-        .form-group.mb-30
-          %label.control-label.font-weight-light{for: "password"} Password
-          %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
-          %a.help-block.in-gold-500{href: "#"} Forgot password?
-        .form-group.mb-30
-          %label.control-label.font-weight-light{for: "confirm"} Confirm Password
-          %input#confirm.form-control{name:"confirm", type: "password", placeholder: "Confirm Password"}
-        .form-group.checkbox.text-center.mb-30
-          %label.font-weight-light.pl-0
-            %input.checkbox-input{type: "checkbox", hidden: "true"}
-            %span.checkbox-icon
-              %i.fa.fa-check
-            %span.checkbox-text Remember me
-        .text-center
-          %button.btn.btn-default.mb-20 Back to Store
+      .general-form
+        =form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group.mb-30
+            =f.label 'Enter Email', class: 'control-label font-weight-light'
+            =f.email_field :email, autofocus: true,  placeholder: "Enter Email", class: 'form-control', id: 'email'          
+            =f.label 'Password', class: 'control-label font-weight-light'
+            =f.password_field :password, autocomplete: "off",  placeholder: "Password", class: 'form-control', id: 'password'
+
+            - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'    
+              %a.help-block.in-gold-500{href: new_password_path(resource_name)} Forgot password?
+
+            - if devise_mapping.rememberable?
+              .form-group.checkbox.text-center.mb-30
+                %label.font-weight-light.pl-0
+                  =f.check_box :remember_me, class: 'checkbox-input' , hidden: "true"
+                  %span.checkbox-icon
+                    %i.fa.fa-check
+                  =f.label :remember_me, class: 'checkbox-text'
+            =f.submit "Log in", class: 'btn btn-default mb-20'
+            
+          =link_to 'Back to Store', catalog_index_path, class: 'btn btn-default mb-20'
       %p.general-sign-text.text-center
         Don’t have an Account?
-      .in-gold-500
-        = link_to "Sign Up", new_user_registration_path
+        = link_to "Sign Up", new_user_registration_path, class: 'in-gold-500'
+      /= render "devise/shared/links"
+        
     %script{src: "https://use.fontawesome.com/67602d7308.js"}
     %script{src: "../../javascripts/jquery.js"}
     %script{src: "../../javascripts/bootstrap.js"}
