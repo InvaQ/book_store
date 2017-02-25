@@ -21,7 +21,11 @@ gem 'bootstrap-sass'
 gem 'kaminari'
 
 
-
+gem 'aasm'
+gem 'rails_admin'
+gem 'rectify'
+gem 'rails-i18n'
+gem 'wicked'
 
 #authentication
 

@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214164400) do
+ActiveRecord::Schema.define(version: 20170225152421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "addressable_type"
+    t.integer  "addressable_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "name"
+    t.integer  "country_id"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "phone"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+    t.index ["country_id"], name: "index_addresses_on_country_id", using: :btree
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -60,6 +76,47 @@ ActiveRecord::Schema.define(version: 20170214164400) do
     t.index ["book_id", "category_id"], name: "index_categorizations_on_book_id_and_category_id", using: :btree
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.integer  "discount"
+    t.string   "code"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_coupons_on_code", using: :btree
+    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "number"
+    t.string   "cvv"
+    t.integer  "expiry_month"
+    t.integer  "expiry_year"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.index ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_credit_cards_on_user_id", using: :btree
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price",      precision: 10, scale: 2
+    t.integer  "min_days"
+    t.integer  "max_days"
+    t.integer  "country_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["country_id"], name: "index_deliveries_on_country_id", using: :btree
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.integer  "book_id"
     t.integer  "cart_id"
@@ -69,6 +126,19 @@ ActiveRecord::Schema.define(version: 20170214164400) do
     t.datetime "updated_at",                                     null: false
     t.index ["book_id"], name: "index_line_items_on_book_id", using: :btree
     t.index ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "state"
+    t.integer  "user_id"
+    t.decimal  "total_price",    precision: 10, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "delivery_id"
+    t.integer  "credit_card_id"
+    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -108,6 +178,14 @@ ActiveRecord::Schema.define(version: 20170214164400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "addresses", "countries"
+  add_foreign_key "coupons", "orders"
+  add_foreign_key "credit_cards", "orders"
+  add_foreign_key "credit_cards", "users"
+  add_foreign_key "deliveries", "countries"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "carts"
+  add_foreign_key "orders", "credit_cards"
+  add_foreign_key "orders", "deliveries"
+  add_foreign_key "orders", "users"
 end
