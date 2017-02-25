@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   get '/users/:id', to: 'users#settings', as: 'settings'
 
-  root to:"home#home"
+  root to:"home#index"
   
   resources :catalog, only: [:index, :show]
 

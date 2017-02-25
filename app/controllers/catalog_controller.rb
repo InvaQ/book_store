@@ -1,5 +1,4 @@
 class CatalogController < ApplicationController
-  before_action :set_category
   helper_method :sort_column, :sort_direction
 
   def index
@@ -33,9 +32,6 @@ class CatalogController < ApplicationController
   def sort_column
     sortable_columns.include?(params[:column]) ? params[:column] : "title"
   end
-  def set_category
-    @category = Category.first(3)
-  end
-
+  
    
 end

@@ -15,4 +15,5 @@ class LineItem < ApplicationRecord
     end
     current_item
   end
+
 end

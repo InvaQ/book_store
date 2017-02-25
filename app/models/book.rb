@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :categorizations
   has_many :categories, through: :categorizations
   has_and_belongs_to_many :authors
+  has_many :line_items
+  #has_many :orders through: :line_items
 
   validates :title, :description, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }

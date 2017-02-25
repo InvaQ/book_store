@@ -77,46 +77,25 @@
             %th.col-total
               %span.in-grey-600 SubTotal
             %th.col-close
-          %tr
-            %td
-              .general-img-wrap-table
-                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            %td
-              %p.general-title Android Programming for Beginners
-            %td
-              %span.font-16.in-gold-500 €28.50
-            %td
-              .input-group
-                %a.input-link{href: "#"}
-                  %i.fa.fa-minus.line-height-40
-                %input.form-control.quantity-input{type: "text"}
-                %a.input-link{href: "#"}
-                  %i.fa.fa-plus.line-height-40
-            %td
-              %span.font-16.in-gold-500 €32.90
-            %td
-              %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-                %span{'aria-hidden': "true"} &times;
-          %tr
-            %td
-              .general-img-wrap-table
-                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            %td
-              %p.general-title Android Programming for Beginners
-            %td
-              %span.font-16.in-gold-500 €28.50
-            %td
-              .input-group
-                %a.input-link{href: "#"}
-                  %i.fa.fa-minus.line-height-40
-                %input.form-control.quantity-input{type: "text"}
-                %a.input-link{href: "#"}
-                  %i.fa.fa-plus.line-height-40
-            %td
-              %span.font-16.in-gold-500 €32.90
-            %td
-              %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
-                %span{'aria-hidden': "true"} &times;
+          - @cart.line_items.each do |line|
+            %tr
+              %td
+                .general-img-wrap-table
+                  %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              %td
+                %p.general-title 
+                  =line.book.title
+              %td
+                %span.font-16.in-gold-500 
+                  =line.book.price
+              =render "/shared/change_amount"
+              %td
+                %span.font-16.in-gold-500 
+                  =line.total_price
+              %td
+                %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+                  %span{'aria-hidden': "true"} &times;
+          
       .general-order-wrap
         .row
           .col-sm-4
@@ -134,7 +113,8 @@
                   %td
                     %p.font-16 Subtotal:
                   %td
-                    %p.font-16 €117.69
+                    %p.font-16
+                      =@cart.total_cart_price
                 %tr
                   %td
                     %p.font-16 Coupon:

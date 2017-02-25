@@ -43,7 +43,7 @@ gem 'cancancan'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
-  
+  gem 'rails-controller-testing'
   gem 'capybara'
   gem 'factory_girl_rails'
 end

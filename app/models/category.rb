@@ -6,6 +6,10 @@ class Category < ApplicationRecord
     books.count
   end
 
+  def self.get_first_listed
+   first(3)
+  end
+
 end
 
 

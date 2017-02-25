@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy]
   def index
     @carts = Cart.all
   end
@@ -9,12 +9,30 @@ class CartsController < ApplicationController
   end
   
   def create
-    @cart = Cart.new(cart_params)
+    #byebug
+    @cart = Cart.new
     if @cart.save
       redirect_to @cart
     else
       render action: 'new'
     end
+  end
+
+  def show
+    
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @cart.update(cart_params)
+      redirect_to @cart
+    else
+      render action: 'edit'
+    end
+
   end
 
   def destroy    
@@ -26,9 +44,10 @@ class CartsController < ApplicationController
 
 
 private
+  
   def cart_params
-    params.require(:cart)
-  end
+      params[:cart]
+    end
 
   def set_cart
     @cart = Cart.find(params[:id])
