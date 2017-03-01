@@ -25,8 +25,16 @@
                   .col-md-5.col-md-offset-1
                     %h3.general-subtitle.mt-0 Shipping Address
               .row
-                =render 'billing_address'
-                =render 'shipping_address'
+                .col-md-5.mb-40
+                  .visible-xs.visible-sm
+                    %h3.general-subtitle.mt-0 Billing Address
+                  =render 'address_form', object: @form, type: 'billing'
+                .col-md-5.mb-40.col-md-offset-1.mb-25
+                  .visible-xs.visible-sm
+                    %h3.general-subtitle.mt-0 Shipping Address
+                  =render 'address_form', object: @form, type: 'shipping'  
+                  /=render 'shipping_address'
+
         #privacy.tab-pane.fade{role: "tabpanel"}
           =render 'privacy'
     

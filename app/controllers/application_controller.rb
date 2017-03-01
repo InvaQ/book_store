@@ -12,8 +12,6 @@ class ApplicationController < ActionController::Base
     @category = Category.get_first_listed
   end
 
-  def set_cart
-    @cart = Cart.find(session[:cart_id])
-  end
+  
   
 end

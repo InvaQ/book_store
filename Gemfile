@@ -18,11 +18,12 @@ gem "haml-rails"
 gem 'pg'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
-gem 'kaminari'
+gem 'simple_form'
 
 
 gem 'aasm'
 gem 'rails_admin'
+gem 'kaminari'
 gem 'rectify'
 gem 'rails-i18n'
 gem 'wicked'

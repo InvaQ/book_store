@@ -6,7 +6,7 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.integer :addressable_id
       t.string :first_name
       t.string :last_name
-      t.string :name
+      t.string :address
       t.references :country, foreign_key: true
       t.string :city
       t.string :zip

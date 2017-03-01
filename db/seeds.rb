@@ -6,11 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-[Book,Author, Picture, Category].each do |klass|
+[Book,Author, Picture, Category, Country, User].each do |klass|
   klass.delete_all
 end
 
-
+User.create!(email: 'admin@test.com', password: 'testtest')
+User.create!(email: 'user@test.com', password: 'testtest')
 
 
 Book.create!(title: 'Real-Life Responsive Web Design', description: 'Smart front-end techniques and design 
@@ -41,21 +42,7 @@ Book.all.each_with_index do |book, index|
   book.categories << Category.first if index.even?    
 end
 
-#Author.create!(first_name: 'Vitaly',last_name: 'Friedman')
-#Author.create!(first_name: 'Daniel ',last_name: 'Mall')
-#Author.create!(first_name: 'Gayle',last_name: 'Laakmann')
-#Author.create!(first_name: 'McDowell',last_name: 'Rusk')
-#Author.create!(first_name: 'Mark',last_name: 'Lutz')
-#Author.create!(first_name: 'Steve',last_name: 'McConnell')
-#Picture.create!(image_url: '1.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '2.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '3.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '4.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '5.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '6.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '7.png', imageable_type: 'book')
-#Picture.create!(image_url: '8.png', imageable_type: 'book')
-#Picture.create!(image_url: '9.png', imageable_type: 'book')
-#Picture.create!(image_url: '10.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '11.jpg', imageable_type: 'book')
-#Picture.create!(image_url: '12.jpg', imageable_type: 'book')
+{'USA': '123', 'Ukraine': '124', 'Germany': '125', 'Malta': '126',
+             "Australia": '127', 'Russia': '128', 'Japan': '129'}.each do |name, code|
+  Country.create!(name: name, code: code)
+end

@@ -1,0 +1,8 @@
+=field.hidden_field :addressable_type, value: type
+-[:first_name, :last_name, :address, :city, :zip].each do |string|
+  .form-group
+    =field.input string, input_html: {id: "#{string}"}
+.form-group
+  =field.input :country_id, collection: @countries, input_html: { id: 'country',  placeholder: "Select a country"}     
+.form-group.mb-60
+  =field.input :phone, input_html: {id: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}

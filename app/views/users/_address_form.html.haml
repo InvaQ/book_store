@@ -1,0 +1,5 @@
+= simple_form_for object, url: update_address_path, method: :patch, data: {type: "#{type}_address"} do |f|
+  =render 'fields', field: f, type: "#{type}_address"
+  .mb-40
+  .text-center.general-text-align
+    = f.button :submit, class: "btn disabled"

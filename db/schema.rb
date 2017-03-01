@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170225152421) do
     t.integer  "addressable_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "name"
+    t.string   "address"
     t.integer  "country_id"
     t.string   "city"
     t.string   "zip"
