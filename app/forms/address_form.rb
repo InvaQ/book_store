@@ -15,5 +15,12 @@ validates :address, length:{ maximum: 50}
 validates :zip, length: { maximum: 10}
 #validates :phone, format: { with: /\A\+\d{6,12}\z/ }
 
+def get_old_info(user)
+    STR_ATTRS.each do |attribute|
+      next if !user.respond_to?(attribute) || send(attribute).present?
+      send("#{attribute}=", user.send(attribute))
+    end
+    self
+  end
 
 end

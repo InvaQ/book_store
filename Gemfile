@@ -23,6 +23,7 @@ gem 'simple_form'
 
 gem 'aasm'
 gem 'rails_admin'
+gem 'rails_admin_aasm'
 gem 'kaminari'
 gem 'rectify'
 gem 'rails-i18n'
@@ -46,7 +47,7 @@ gem 'cancancan'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'byebug', platform: :mri
+  #gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'capybara'
@@ -60,6 +61,7 @@ group :test do
 end
 
 group :development do
+  gem 'pry-rails'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

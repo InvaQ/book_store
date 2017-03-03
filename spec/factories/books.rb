@@ -6,7 +6,6 @@ FactoryGirl.define do
     title { FFaker::Book.title }
     description { FFaker::Book.description }
     height 150
-     byebug
     width 100
     depth 47
     publication { rand(1990..2017) }
