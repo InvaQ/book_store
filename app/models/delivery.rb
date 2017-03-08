@@ -6,4 +6,8 @@ class Delivery < ApplicationRecord
   validates :min_days, :max_days, :name, :price, presence: true
   validates :min_days, :max_days, numericality: { greater_than: 0 }
 
+  def transfer
+    "from #{min_days} to #{max_days}"
+  end
+
 end

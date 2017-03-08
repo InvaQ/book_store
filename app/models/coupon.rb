@@ -6,4 +6,12 @@ class Coupon < ApplicationRecord
   validates :discount, presence: true
   validates :discount, numericality: { greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 99 }
+
+
+private
+
+  def activated?
+    order.blank?
+  end
+
 end

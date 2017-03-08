@@ -1,0 +1,18 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        %span.in-grey-600= t('carts.edit.product')
+      %th.col-title
+      %th.col-price
+        %span.in-grey-600= t('carts.edit.price')
+      %th
+        %span.in-grey-600= t('carts.edit.quantity')
+      %th
+        %span.in-grey-600= t('carts.edit.sub_total')      
+        %th.close-link
+  %tbody    
+    = field.simple_fields_for :line_items do |line|
+      = render 'line_item', line_item: line.object,
+          field: line
+    

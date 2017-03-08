@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    
+    %main.container.mb-res-50
+      %h1.general-title-margin Checkout
+      %ul.steps.list-inline
+        %li.step.active
+          %span.step-number 1
+          %span.step-text.hidden-xs Address
+        %li.step-divider
+        %li.step
+          %span.step-number 2
+          %span.step-text.hidden-xs Delivery
+        %li.step-divider
+        %li.step
+          %span.step-number 3
+          %span.step-text.hidden-xs Payment
+        %li.step-divider
+        %li.step
+          %span.step-number 4
+          %span.step-text.hidden-xs Confirm
+        %li.step-divider
+        %li.step
+          %span.step-number 5
+          %span.step-text.hidden-xs Complete
+      %h3.general-subtitle Credit Card
+      = simple_form_for @order, url: checkout_path,html: { class: 'mb-80', id: 'credit_card_form' } do |field|
+
+        .max-600.mb-80
+          = field.simple_fields_for :credit_card, @form do |field|
+            .form-group
+              = field.input :number
+            .row
+              .col-sm-4
+                .form-group
+                  = field.input :name
+              .col-sm-3
+                .form-group
+                  = field.input :expiry_month
+              .col-sm-3
+                .form-group
+                  = field.input :expiry_year    
+              .col-sm-2
+                .form-group.relative
+                  = field.input :cvv
+ 
+        = render 'orders/order_summary'
+        .text-center
+          = field.submit 'save_and_continue', class: 'button btn btn-default mb-20'
+    

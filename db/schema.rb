@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301113051) do
+ActiveRecord::Schema.define(version: 20170306122433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20170301113051) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
-    t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -86,16 +85,17 @@ ActiveRecord::Schema.define(version: 20170301113051) do
   create_table "coupons", force: :cascade do |t|
     t.integer  "discount"
     t.string   "code"
-    t.integer  "order_id"
+    t.integer  "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_coupons_on_cart_id", using: :btree
     t.index ["code"], name: "index_coupons_on_code", using: :btree
-    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
   end
 
   create_table "credit_cards", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "number"
+    t.string   "name"
     t.string   "cvv"
     t.integer  "expiry_month"
     t.integer  "expiry_year"
@@ -124,8 +124,10 @@ ActiveRecord::Schema.define(version: 20170301113051) do
     t.decimal  "price",      precision: 8, scale: 2
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.integer  "order_id"
     t.index ["book_id"], name: "index_line_items_on_book_id", using: :btree
     t.index ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+    t.index ["order_id"], name: "index_line_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -151,14 +153,17 @@ ActiveRecord::Schema.define(version: 20170301113051) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "avatar_url",  default: "https://goo.gl/Q5p7FL"
+    t.string   "title"
     t.integer  "rate"
     t.text     "description"
-    t.boolean  "verified"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer  "book_id"
+    t.boolean  "verified",    default: false
+    t.string   "state"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "user_id"
+    t.index ["book_id"], name: "index_reviews_on_book_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -180,7 +185,7 @@ ActiveRecord::Schema.define(version: 20170301113051) do
   end
 
   add_foreign_key "addresses", "countries"
-  add_foreign_key "coupons", "orders"
+  add_foreign_key "coupons", "carts"
   add_foreign_key "credit_cards", "orders"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "deliveries", "countries"
@@ -189,4 +194,6 @@ ActiveRecord::Schema.define(version: 20170301113051) do
   add_foreign_key "orders", "credit_cards"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
 end

@@ -28,10 +28,6 @@
                 %li
                   %a{href: catalog_path(category)} 
                     = category.name
-                
-              /%li.divider{role: "separator"}
-              /%li
-              /  = link_to "Logout", destroy_user_session_path, method: :delete
           %li
             - if user_signed_in?
               %a.dropdown-toggle{href: '#', 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} My account

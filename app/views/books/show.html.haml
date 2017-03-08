@@ -8,9 +8,10 @@
     %link{href: "../css/style.css", rel: "stylesheet"}
   %body
     %main.container
-      %a.general-back-link{href: "#"}
-        %i.fa.fa-long-arrow-left.mr-15
-        Back to results
+      %a.general-back-link
+        %i.fa-long-arrow-left.mr-15
+        = link_to 'Back to results', @previous_path
+        
       .row
         .col-sm-6
           .product-gallery
@@ -31,28 +32,13 @@
             .col-xs-12.col-md-4
               %p.h1.in-gold-500.mt-10
                 = @book.price
-            = form_for(@book, url: line_items_path, method: :post) do |f|
-              =f.hidden_field :book_id, value: @book.id
-              .col-xs-5.col-md-3
-                .input-group.general-position
-                  %a.input-link{href: "#"}
-                    %i.fa.fa-minus.line-height-40
-                  =f.text_field :quantity, value: 1, placeholder: '1', class: 'form-control quantity-input'
-                  /%input.form-control.quantity-input{type: "text"}
-                  %a.input-link{href: "#"}
-                    %i.fa.fa-plus.line-height-40
-              .col-xs-7.col-md-5
-                =f.submit 'Add to Cart', class: 'btn btn-default pull-right general-position'
+            =render '/shared/change_amount', object: @book
           .pt-20.divider-lg
             %p Description
             %p.in-grey-600.small.line-height-2
               = truncate(@book.description, length:60)
               %a.in-gold-500.ml-10.read-more{href: "#"} Read More
-              :javascript
-                $('.read-more').on('click', function(e) {
-                e.preventDefault()
-                $(this).parent().html("#{escape_javascript @book.description}")
-                })
+              
           .pt-20.divider-lg
             .clearfix
               %p.general-item-info.pull-right
@@ -69,43 +55,21 @@
                 =@book.materials
               %p.break-word Materials
       .mb-80
-        %h3.in-gold-500.mb-25 Reviews (3)
-        %ul.media-list
-          %li.media.divider-lg
-            .media-left
-              %a{href: "#"}
-                %img.img-circle.logo-size.media-object.max-unset{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-            .media-body
-              %div
-                %p.general-message-date.hidden-xs 11/11/16
-                %h4.media-heading.max-240.general-message-name
-                  %span.general-message-verified Verified Reviewer
-                  Rita J. Lewis
-              .mb-15
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-              %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-          %li.media.divider-lg
-            .media-left
-              %a{href: "#"}
-                %span.img-circle.logo-size.logo-empty.media-object M
-            .media-body
-              %div
-                %p.general-message-date.hidden-xs 11/11/16
-                %h4.media-heading.max-240.general-message-name
-                  %span.general-message-verified Verified Reviewer
-                  Rita J. Lewis
-              .mb-15
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star
-                %i.fa.fa-star.rate-star.rate-empty
-              %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-    
-    %script{src: "https://use.fontawesome.com/67602d7308.js"}
-    %script{src: "../../javascripts/jquery.js"}
-    %script{src: "../../javascripts/bootstrap.js"}
+        %h3.in-gold-500.mb-25 
+        =@book.reviews.count
+        = render @book.reviews
+        -if can? :create, Review
+          .h3.in-gold-500
+          = render '/reviews/review_form'
+        -else
+          .h3.in-gold-500
+            /.............
+            =link_to 'Sign in', new_user_session_path
+
+:javascript
+  $('.read-more').on('click', function(e) {
+  e.preventDefault()
+  $(this).parent().html("#{escape_javascript @book.description}")
+  })
+
+        

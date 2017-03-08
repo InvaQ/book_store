@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+%html  
+  %main.container
+    %h1.general-title-margin Checkout
+    %ul.steps.list-inline
+      %li.step.active
+        %span.step-number 1
+        %span.step-text.hidden-xs Address
+      %li.step-divider
+      %li.step
+        %span.step-number 2
+        %span.step-text.hidden-xs Delivery
+      %li.step-divider
+      %li.step
+        %span.step-number 3
+        %span.step-text.hidden-xs Payment
+      %li.step-divider
+      %li.step
+        %span.step-number 4
+        %span.step-text.hidden-xs Confirm
+      %li.step-divider
+      %li.step
+        %span.step-number 5
+        %span.step-text.hidden-xs Complete
+    = simple_form_for @order, url: checkout_path, class: 'res-mb-100' do |field|
+      = field.simple_fields_for :billing, @billing do |item_field|
+        = render 'users/fields', field: item_field, type: 'billing_address'
+      = field.simple_fields_for :shipping, @shipping do |item_field|
+        = render 'users/fields', field: item_field, type: "shipping_address"
+      = field.submit 'save_and_continue', class: 'button btn btn-default mb-20'
+    = link_to "skip this step", next_wizard_path
+
+
+
+    

@@ -1,5 +1,5 @@
 class Country < ApplicationRecord
   has_many :deliveries
   
-  validates :name, :code, presence: true
+  validates :name, presence: true
 end

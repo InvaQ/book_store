@@ -1,7 +1,11 @@
-%td
-  .input-group
-    %a.input-link{href: "#"}
-      %i.fa.fa-minus.line-height-40
-    %input.form-control.quantity-input{type: "text"}
-    %a.input-link{href: "#"}
-      %i.fa.fa-plus.line-height-40
+= form_for(object, url: line_items_path, method: :post) do |f|
+  =f.hidden_field :book_id, value: object.id
+  .col-xs-5.col-md-3
+    .input-group.general-position
+      %div.input-link
+        %i.glyphicon.glyphicon-minus.line-height-40{type: 'button', onclick: "decrementVal()"}
+      =f.text_field :quantity, value: 1, class: 'form-control quantity-input', id: "form_quantity"
+      %div.input-link
+        %i.glyphicon.glyphicon-plus.line-height-40{type: 'button', onclick: "incrementVal()"}
+  .col-xs-7.col-md-5
+    =f.submit 'Add to Cart', class: 'btn btn-default pull-right general-position'

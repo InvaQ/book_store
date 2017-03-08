@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   
   
   resources :catalog, only: [:index, :show]
-
+  resources :checkouts, only: [:show, :update]
   resources :books
   resources :orders
   resources :carts

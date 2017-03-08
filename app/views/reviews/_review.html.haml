@@ -1,0 +1,20 @@
+%ul.media-list
+  %li.media.divider-lg
+
+    .media-left
+      %a{href: "#"}
+        %img.img-circle.logo-size.media-object.max-unset{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+    .media-body
+      %div
+        %p.general-message-date.hidden-xs= review.published_at
+        -if review.verified?
+          %h4.media-heading.max-240.general-message-name
+            %span.general-message-verified Verified Reviewer
+            =review.user_name
+      .mb-15
+        - review.rate.times do
+          %i.fa.fa-star.rate-star
+      %p= review.title
+      %p= review.description
+
+

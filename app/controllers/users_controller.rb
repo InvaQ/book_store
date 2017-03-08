@@ -19,7 +19,6 @@ class UsersController < ApplicationController
   end
 
   def update_email
-  binding.pry 
   @user = current_user
     if @user.update(user_params)
        success
@@ -29,7 +28,6 @@ class UsersController < ApplicationController
   end
 
   def update_password
-      binding.pry 
     @user = current_user
     if @user.update_with_password(user_params)
       bypass_sign_in(@user)
@@ -50,7 +48,7 @@ private
   end
 
   def set_countries
-    @countries = Country.select(:id, :name, :code)
+    @countries = Country.select(:id, :name)
   end
 
   def address_params
@@ -66,7 +64,8 @@ private
   end
 
   def error
-    flash_render 'settings', alert: "info can't be changed" 
+    #flash_render 'settings', 
+    #alert: "info can't be changed" 
   end
 
 end

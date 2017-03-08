@@ -12,11 +12,13 @@ class Ability
         can :manage, :all
         can :all_events, Order
         can :access, :rails_admin
+        can :create, Review
         can :dashboard
-      else        
+      else
         can :read, Order, user_id: user.id
         can :manage, User, id: user.id
         can :new, Review
+        can :update, Book
         can :create, Review, user_id: user.id
     end
     

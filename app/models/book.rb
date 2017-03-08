@@ -14,7 +14,7 @@ class Book < ApplicationRecord
 
 
   def get_author_names
-    self.authors.collect {|author| author.name }.join(', ')
+    authors.collect {|author| author.name }.join(', ')
   end
 
   def get_book_dimensions

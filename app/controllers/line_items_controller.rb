@@ -1,9 +1,10 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :destory, :update]
+  before_action :set_cart, only: [:create, :destroy]
+  before_action :set_line_item, only: [:show, :edit, :destroy, :update]
   before_action :sanitizer_page_params, only: [:create]
 
+  
 
   def new
     @line_item = LineItem.new
@@ -12,7 +13,7 @@ class LineItemsController < ApplicationController
   def create
     @line_item = @cart.add_book(params[:book][:book_id], params[:book][:quantity])   
     if @line_item.save
-      redirect_to catalog_index_path  
+      redirect_to :back 
     else
       render action: 'new'
     end
@@ -34,22 +35,11 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def destory
+  def destroy
     @line_item.destroy
-    redirect_to line_items_path
+    redirect_to @cart
   end
 
-  def decrement
-    @cart = current_cart
-    @line_item = @cart.line_items.find(line_item_params)
-    @line_item.decrement(@line_item.id)
-
-    if @line_item.save
-      redirect_to catalog_path
-    else
-      render action: 'edit'
-    end
-  end
 
   private
 
