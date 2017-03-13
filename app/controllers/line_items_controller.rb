@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
-  include CurrentCart
-  before_action :set_cart, only: [:create, :destroy]
+  include CurrentOrder
+  before_action :set_order, only: [:create, :destroy]
   before_action :set_line_item, only: [:show, :edit, :destroy, :update]
   before_action :sanitizer_page_params, only: [:create]
 
@@ -11,7 +11,7 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    @line_item = @cart.add_book(params[:book][:book_id], params[:book][:quantity])   
+    @line_item = @order.add_book(params[:book][:book_id], params[:book][:quantity])   
     if @line_item.save
       redirect_to :back 
     else

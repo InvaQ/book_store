@@ -1,6 +1,5 @@
 class Coupon < ApplicationRecord
   belongs_to :order, optional: true
-
   
   validates :code, presence: true, uniqueness: true, length: { maximum: 16 }
   validates :discount, presence: true
@@ -8,10 +7,10 @@ class Coupon < ApplicationRecord
                             less_than_or_equal_to: 99 }
 
 
-private
+
 
   def activated?
-    order.blank?
+    order_id.nil?
   end
 
 end

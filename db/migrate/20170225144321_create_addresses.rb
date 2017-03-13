@@ -11,6 +11,7 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.string :city
       t.string :zip
       t.string :phone
+      t.string :type
 
       t.timestamps
     end

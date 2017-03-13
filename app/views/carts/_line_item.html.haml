@@ -11,11 +11,14 @@
   %td
     %span.font-16.in-gold-500 
       .input-group.general-position
-        %div.input-link
-          %i.glyphicon.glyphicon-minus.line-height-40{type: 'button', onclick: "decrementVal()"}
-        =field.text_field :quantity, value: line_item.quantity, class: 'form-control quantity-input', id: 'form_quantity'
-        %div.input-link
-          %i.glyphicon.glyphicon-plus.line-height-40{type: 'button', onclick: "incrementVal()"}
+        - if local_assigns[:field]
+          %div.input-link
+            %i.glyphicon.glyphicon-minus.line-height-40{type: 'button', onclick: "decrementVal()"}
+          =field.text_field :quantity, value: line_item.quantity, class: 'form-control quantity-input', id: 'form_quantity'
+          %div.input-link
+            %i.glyphicon.glyphicon-plus.line-height-40{type: 'button', onclick: "incrementVal()"}
+        -else
+          =line_item.quantity
   %td
     %span.font-16.in-gold-500 
       =line_item.total_price

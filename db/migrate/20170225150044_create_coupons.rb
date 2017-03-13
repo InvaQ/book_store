@@ -3,7 +3,7 @@ class CreateCoupons < ActiveRecord::Migration[5.0]
     create_table :coupons do |t|
       t.integer :discount
       t.string :code, index: true, unique: true
-      t.references :cart, foreign_key: true
+      t.references :order, foreign_key: true    
 
       t.timestamps
     end

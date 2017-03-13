@@ -10,12 +10,17 @@ class ApplicationController < ActionController::Base
 
 
 
-  private
+  protected
 
   def set_category
     @category = Category.get_first_listed
   end
 
-  
+
+  def fast_authenticate_user!
+    return if user_signed_in?
+    session['user_return_to'] = request.fullpath
+    redirect_to new_user_session_path
+  end
   
 end

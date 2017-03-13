@@ -3,49 +3,100 @@ class Order < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
-  has_one :credit_card, dependent: :destroy
-  has_many :line_items, dependent: :destroy
-  #has_one :cart, dependent: :destroy
-  has_one :shipping_address, -> { where addressable_type: "shipping_address"},
-     class_name: Address, foreign_key: :addressable_id, foreign_type: :addressable_type, dependent: :destroy
-  has_one :billing_address, -> { where addressable_type: "billing_address"},
-     class_name: Address, foreign_key: :addressable_id, foreign_type: :addressable_type, dependent: :destroy
+  has_one :credit_card, dependent: :destroy  
+  has_one :coupon, dependent: :nullify
 
+  has_many :line_items, dependent: :destroy
+  accepts_nested_attributes_for :line_items, allow_destroy: true #!!!!!!
+  
+  has_one :shipping_address, as: :addressable, dependent: :destroy
+  has_one :billing_address, as: :addressable, dependent: :destroy
   
   aasm column: :state, whiny_transitions: false do
     state :creating, initial: true
-    state :in_progress
+
+    state :address
+    state :delivery
+    state :payment
+    state :confirm
+    state :complete
+
     state :in_transit
-    state :delivering
-    state :canceling
+    state :delivered
+    state :canceled
 
     event :checkout do
-      transitions from: :creating, to: :in_progress
+      transitions from: :creating, to: :address
+    end
+
+    event :filling_address do
+      transitions from: :address, to: :delivery
+    end
+
+    event :filling_delivery do
+      transitions from: :delivery, to: :payment
+    end
+
+    event :filling_payment do
+      transitions from: :payment, to: :confirm
     end
     
-    event :confirmed do
-      transitions from: :in_progress, to: :in_transit
+    event :place_order do
+      transitions from: :confirm, to: :complete
+    end
+
+    event :bank_approval do 
+      transitions from: :complete, to: :in_transit
     end
 
     event :sent do 
-      transitions from: :in_transit, to: :delivering
+      transitions from: :in_transit, to: :delivered
     end
 
-    event :canceled do
-      transitions from: :in_progress, to: :canceling
+    event :canceling do
+      transitions from: [ :creating, :delivery, :payment, :confirm, :complete, :in_transit ], to: :canceled
     end
 
   end
 
-  def add_line_items_from_cart(cart)
-    
-    cart.line_items.each do |item|
-      binding.pry
-      item.cart_id = nil
-      line_items << item
+  
+
+
+  def add_book(book_id, quantity)
+    current_item = line_items.find_by(book_id: book_id)
+    if current_item
+      current_item.quantity += quantity
+    else
+      current_item = line_items.build(book_id: book_id, quantity: quantity)
+      current_item.price = current_item.book.price
     end
+    current_item
   end
 
 
+  def amount_of_books
+    self.line_items.sum('quantity')
+  end
 
+  def subtotal_cart_price
+    self.line_items.inject(0) do |sum, line|
+      sum + line.total_price
+    end
+  end
+
+  def coupon_cost
+    coupon ? subtotal_cart_price * coupon.discount/100 : 0.00
+  end
+
+  def delivry_cost
+    delivery.price
+  end
+
+  def total_cart_price
+    if delivery
+      subtotal_cart_price - coupon_cost + delivry_cost
+    else
+      subtotal_cart_price - coupon_cost
+    end
+  end
 end

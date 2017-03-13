@@ -9,7 +9,7 @@
         %span.in-grey-600= 'price'
 
   %tbody
-  - Delivery.where(country_id: Order.last.shipping_address.country_id).each do |delivery|
+  - Delivery.where(country_id: @order.shipping_address.country_id).each do |delivery|
     %tr.delivery-item
       %td
         .form-group.radio.mt-0.mb-0

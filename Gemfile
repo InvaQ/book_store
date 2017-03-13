@@ -61,6 +61,7 @@ group :test do
 end
 
 group :development do
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'

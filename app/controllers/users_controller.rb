@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   include Rectify::ControllerHelpers
-  before_action :set_form,  only: [:settings]
+  before_action :authenticate_user!
+  before_action :set_forms,  only: [:settings]
   before_action :set_countries
   def new
     
   end
 
   def update_address
-    @form = AddressForm.from_params(params.permit!)
-    UpdateAddress.call(@form, current_user) do
+    UpdateAddress.call(params, current_user) do
       on(:ok) do 
         success
       end
@@ -39,13 +39,11 @@ class UsersController < ApplicationController
 
 private
   
-  def set_form
+  def set_forms
     Address::TYPES.each do |type|
-      address=current_user.send("#{type}_address")
-      form = AddressForm.from_model(address).get_old_info(current_user)
-      instance_variable_set("@#{type}", form)
+      instance_variable_set("@#{type}", current_user.send("#{type}_address"))
     end
-  end
+end
 
   def set_countries
     @countries = Country.select(:id, :name)

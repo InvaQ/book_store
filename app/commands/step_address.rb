@@ -1,50 +1,41 @@
-class StepAddress < UpdateAddress
+class StepAddress < Rectify::Command
 
 def initialize(params ,object)
-  @params = params[:order].permit!
-  @object = object
-  @billing = @params[:billing]
-  @shipping = @params[:shipping]
+  @params = params
+  @mark = params[:use_billing]
+  @object = object 
 end
 
-def call
-  #set_form
-  
-    
-    #return broadcast(:invalid) if form.invalid? 
-    #use_billing if params[:use_billing] == true   
+  def call
+    return broadcast(:invalid, @shipping_params, @billing_params ) if check_shipping_params.invalid? || check_billing_params.invalid?  
       broadcast(:ok) if change_address
-    #.............
   end
 
   private
-  attr_reader :form, :params
-
-  def use_billing
-    @params[:shipping].merge!(@params[:billing].except(:addressable_type))
-  end
+  attr_reader :params
 
   def change_address
-    @params.each do |address|
-      if @object.respond_to?("#{address}_address")
-        @object.send("#{address}_address") != nil ? update_address(address) : add_address(address)
-
-      end
-    end
+  
+    @billing_params = @mark == "on" ? @shipping_params.dup : @billing_params  
+    
+    ShippingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @object.id })
+    .update(@shipping_params.to_h.except(:id))
+    BillingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @object.id })
+    .update(@billing_params.to_h.except(:id) )
+    
   end
 
-  def update_address(type)
-    @object.send("#{type}_address").update(instance_variable_get("@#{type}"))
+  def address_params
+    params.require(:order).permit(billing: [:first_name, :last_name,:address, :city, :zip,:country_id, :phone],
+     shipping: [:first_name, :last_name,:address, :city, :zip, :country_id, :phone])
   end
 
-  def add_address(type)
-    @object.send("create_#{type}_address", instance_variable_get("@#{type}")) 
+  def check_shipping_params
+    @shipping_params = AddressesForm.from_params(address_params[:shipping])
   end
 
-  def set_form
-    @billing_params = params[:order]
-    @form ||= AddressForm.from_params(params)
+  def check_billing_params
+    @billing_params = AddressesForm.from_params(address_params[:billing])
   end
-
 
 end

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170306122433) do
     t.string   "city"
     t.string   "zip"
     t.string   "phone"
+    t.string   "type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
@@ -85,11 +86,11 @@ ActiveRecord::Schema.define(version: 20170306122433) do
   create_table "coupons", force: :cascade do |t|
     t.integer  "discount"
     t.string   "code"
-    t.integer  "cart_id"
+    t.integer  "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_coupons_on_cart_id", using: :btree
     t.index ["code"], name: "index_coupons_on_code", using: :btree
+    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
   end
 
   create_table "credit_cards", force: :cascade do |t|
@@ -133,12 +134,10 @@ ActiveRecord::Schema.define(version: 20170306122433) do
   create_table "orders", force: :cascade do |t|
     t.string   "state"
     t.integer  "user_id"
-    t.decimal  "total_price",    precision: 10, scale: 2
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.decimal  "total_price", precision: 10, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "delivery_id"
-    t.integer  "credit_card_id"
-    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
     t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
@@ -185,13 +184,12 @@ ActiveRecord::Schema.define(version: 20170306122433) do
   end
 
   add_foreign_key "addresses", "countries"
-  add_foreign_key "coupons", "carts"
+  add_foreign_key "coupons", "orders"
   add_foreign_key "credit_cards", "orders"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "deliveries", "countries"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "carts"
-  add_foreign_key "orders", "credit_cards"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"

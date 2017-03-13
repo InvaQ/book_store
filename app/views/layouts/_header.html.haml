@@ -15,7 +15,7 @@
       %a.shop-link.pull-right.hidden-xs{href: cart_path(id: session[:cart_id])}
         %span.shop-icon
           %span.shop-quantity 
-            = @cart.amount_of_books
+            = @order.amount_of_books
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .hidden-xs
         %ul.nav.navbar-nav

@@ -13,7 +13,9 @@ class StepDelivery < Rectify::Command
   private
 
   def add_delivery
-    @order.update(delivery_id: @params)
+    @order.assign_attributes(delivery_id: @params)
+    @order.total_price = @order.total_cart_price
+    @order.save
   end
 
   def valid?

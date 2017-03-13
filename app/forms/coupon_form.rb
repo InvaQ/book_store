@@ -1,20 +1,22 @@
 class CouponForm < Rectify::Form
   attribute :code, String
 
-  #validates :exist_coupon?
-  #validates :activated_coupon?
+  validates :code, presence: true
+  validate :exist_coupon?
+  validate :activated_coupon?
 
   private
 
   def current_coupon
-    @current_coupon ||= Coupon.find(code: code)
+    Coupon.find_by_code(code)
   end
 
   def exist_coupon?
-    return if code.blank? || !current_coupon.blank?
+    current_coupon
   end
 
   def activated_coupon?
-    return if current_coupon.activated?
+    binding.pry
+    current_coupon.activated? if current_coupon
   end
 end

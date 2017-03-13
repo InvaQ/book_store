@@ -1,0 +1,29 @@
+.general-text-align.mb-60
+  %p.in-gold-500.font-18 Order Summary
+  %table.general-summary-table.general-summary-table-right.general-text-align.mb-60
+    %tbody
+      %tr
+        %td
+          %p.font-16= 'Sub total'
+        %td
+          %p.font-16=object.subtotal_cart_price
+
+      - components.each do |component|        
+        %tr
+          %td
+            - if object.coupon != nil
+              %p.font-16= "Coupon: #{object.coupon_cost}"        
+        %tr
+          %td
+            - if object.delivery != nil 
+              %p.font-16= "Delivery: #{object.delivry_cost}" 
+            - else
+              %p.font-16 Delivery:
+
+
+      %tr
+        %td
+          %strong.font-18= 'order_total'
+        %td
+          %strong#order_subtotal.font-18
+            = object.total_cart_price

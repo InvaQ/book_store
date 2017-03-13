@@ -1,38 +1,51 @@
 class UpdateCart < Rectify::Command
 
 
-  def initialize(params, cart)
-
+  def initialize(params, object)
     @params = params
-    @cart = cart
+    @order = object
   end
 
   def call
-    return broadcast(:invalid, coupon_form) if coupon_form.invalid?
+    unless coupon_blank?
+      get_coupon_form
+      return broadcast(:invalid) if form.invalid?
+    end
     action = params[:to_checkout] ? :to_checkout : :update_cart
     broadcast(action) if update_cart
   end
 
 private
-  attr_reader :cart, :coupon_form, :params
+  attr_reader :order,:form, :params
   
   def update_cart
-    cart.coupon = @coupon if @coupon.present?
-    cart.update_attributes(cart_params)
-
+    order.coupon = @coupon if order.coupon.blank? && @coupon
+    order.total_price = order.total_cart_price
+    order.update_attributes(cart_params)
+     
   end
 
 
-  def coupon
-    return unless params[:cart][:coupon]
-    @coupon ||= Coupon.find(code: params[:cart][:coupon][:code])
+  def get_coupon_form     
+      @form = CouponForm.from_params(coupon_params)
+    binding.pry
+    # return unless coupon_params && !coupon_params[:code].blank?   
+      @coupon = Coupon.find_by_code(coupon_params[:code])   
+    #  true if @coupon && @coupon.activated?
   end
 
-  def coupon_form
-    @coupon_form ||= CouponForm.from_params(params)
+  def coupon_params
+    params.require(:order).require(:coupon).permit(:code)    
   end
+
+  def coupon_blank?
+    coupon_params[:code].blank?
+  end
+
 
   def cart_params
-    params.require(:cart).permit(line_items_attributes: [:id, :quantity])
+    params.require(:order).permit(line_items_attributes: [:id, :quantity])
   end
+
+
 end
