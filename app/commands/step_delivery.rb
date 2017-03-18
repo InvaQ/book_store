@@ -15,6 +15,7 @@ class StepDelivery < Rectify::Command
   def add_delivery
     @order.assign_attributes(delivery_id: @params)
     @order.total_price = @order.total_cart_price
+    @order.user_id = current_user.id  unless @order.user_id
     @order.save
   end
 

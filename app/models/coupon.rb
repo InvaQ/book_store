@@ -9,8 +9,8 @@ class Coupon < ApplicationRecord
 
 
 
-  def activated?
-    order_id.nil?
+  def already_activated?
+    order_id.present?
   end
 
 end

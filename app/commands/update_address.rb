@@ -1,40 +1,32 @@
 class UpdateAddress < Rectify::Command
 
   def initialize(params, object)
-    @params = params.permit!
-     @object = object
+    @params = params
+     @user = object
   end
 
   def call
-    set_form
-    binding.pry
+    check_params
     return broadcast(:invalid) if form.invalid?    
-      broadcast(:ok) if change_address
-    #.............
+    broadcast(:ok) if change_address
   end
 
   protected
-  attr_reader :form
+  attr_reader :params, :form
 
-  def change_address    
-    if @object.respond_to?(form.addressable_type)
-      @object.send(form.addressable_type) != nil ? update_address : add_address
-    end
+  def change_address
+    "#{address_params.keys[0].capitalize}Address".constantize
+      .find_or_create_by({ addressable_type: 'User', addressable_id: @user.id })
+        .update(form.attributes)
   end
 
-  def update_address
-    binding.pry
-    @object.send("#{form[:addressable_type]}").update(@params[:addresses])
+  def address_params
+    params.require(:user).permit(billing: [:first_name, :last_name,:address, :city, :zip,:country_id, :phone],
+     shipping: [:first_name, :last_name,:address, :city, :zip, :country_id, :phone])
   end
 
-  def add_address
-    @object.send("create_#{form[:addressable_type]}", @params[:addresses])
-  end
-
-  def set_form
-
-    @form = AddressesForm.from_params(@params)
-    binding.pry
+  def check_params
+    @form = AddressesForm.from_params(address_params.values[0])    
   end
 
 end

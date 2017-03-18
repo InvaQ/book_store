@@ -22,6 +22,7 @@ class PostReview < Rectify::Command
   
 
   def post_review
+    binding.pry
     review = form.to_h.merge(book_id: @book.id, user_id: @user.id)    
     Review.create(review)
   end

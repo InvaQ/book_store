@@ -36,7 +36,12 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
+gem 'dotenv-rails'
 
+
+# gem 'carrierwave'
+# gem 'carrierwave-dropbox'
+# gem 'mini_magick'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -52,6 +57,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'letter_opener_web'
+  
 end
 
 group :test do

@@ -3,11 +3,11 @@ class Order < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
-  has_one :credit_card, dependent: :destroy  
+  has_one :credit_card, dependent: :destroy
   has_one :coupon, dependent: :nullify
 
   has_many :line_items, dependent: :destroy
-  accepts_nested_attributes_for :line_items, allow_destroy: true #!!!!!!
+  accepts_nested_attributes_for :line_items, allow_destroy: true #remove!
   
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_one :billing_address, as: :addressable, dependent: :destroy
@@ -15,9 +15,8 @@ class Order < ApplicationRecord
   aasm column: :state, whiny_transitions: false do
     state :creating, initial: true
 
-    state :address
-    state :delivery
-    state :payment
+    
+    state :steps
     state :confirm
     state :complete
 
@@ -26,19 +25,11 @@ class Order < ApplicationRecord
     state :canceled
 
     event :checkout do
-      transitions from: :creating, to: :address
+      transitions from: :creating, to: :steps
     end
-
-    event :filling_address do
-      transitions from: :address, to: :delivery
-    end
-
-    event :filling_delivery do
-      transitions from: :delivery, to: :payment
-    end
-
+    
     event :filling_payment do
-      transitions from: :payment, to: :confirm
+      transitions from: :steps, to: :confirm
     end
     
     event :place_order do

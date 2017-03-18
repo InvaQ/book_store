@@ -10,8 +10,8 @@
   klass.delete_all
 end
 
-User.create!(email: 'admin@test.com', password: 'testtest')
-User.create!(email: 'user@test.com', password: 'testtest')
+User.create!(email: 'admin@test.com', password: 'testtest', admin: true).confirm
+User.create!(email: 'user@test.com', password: 'testtest').confirm
 
 
 15.times do

@@ -9,9 +9,10 @@ class UpdateCart < Rectify::Command
   def call
     unless coupon_blank?
       get_coupon_form
-      return broadcast(:invalid) if form.invalid?
+      return broadcast(:invalid, form) if form.invalid?
     end
     action = params[:to_checkout] ? :to_checkout : :update_cart
+    order.checkout if action == :to_checkout
     broadcast(action) if update_cart
   end
 
@@ -28,10 +29,8 @@ private
 
   def get_coupon_form     
       @form = CouponForm.from_params(coupon_params)
-    binding.pry
-    # return unless coupon_params && !coupon_params[:code].blank?   
+      binding.pry
       @coupon = Coupon.find_by_code(coupon_params[:code])   
-    #  true if @coupon && @coupon.activated?
   end
 
   def coupon_params

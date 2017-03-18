@@ -11,7 +11,7 @@ def call
   set_form
 
   return broadcast(:invalid) if @form.invalid? 
-    broadcast(:ok) if add_to_order
+    broadcast(:ok) if add_to_order && change_order_state
 end
 
  private
@@ -21,17 +21,21 @@ end
   end
 
   def update_card
-    binding.pry
-    @order.credit_card.update(@form.to_h)
+    @order.credit_card.update(@form.attributes)
   end 
 
   def add_card
-    binding.pry
-    @order.create_credit_card(@form.to_h)
+    
+    @order.create_credit_card(@form.attributes)
+  end
+
+  def change_order_state
+    return true if @order.confirm?
+    @order.filling_payment
+    @order.save
   end
 
   def set_form
-    binding.pry
     @form = CreditCardForm.from_params(@params)
   end
 

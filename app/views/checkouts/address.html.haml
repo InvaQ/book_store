@@ -13,7 +13,7 @@
         .col-md-5.mb-40
           .visible-xs.visible-sm
             %h3.general-subtitle.mt-0 Billing Address
-          = field.simple_fields_for :billing,@billing do |item_field|   
+          = field.simple_fields_for :billing, @billing do |item_field|   
             = render 'users/fields', field: item_field
         .col-md-5.mb-40.col-md-offset-1.mb-25
           .visible-xs.visible-sm

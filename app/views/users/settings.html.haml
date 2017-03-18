@@ -8,7 +8,7 @@
     %link{href: "../css/style.css", rel: "stylesheet"}
   %body
     %main.container
-      %h1.general-title-margin Settings
+      %h1.general-title-margin= t('.settings_title')
       %ul.nav.nav-tabs.mb-20{role: "tablist"}
         %li.mb-10.active{role: "presentation"}
           %a{href: "#address", 'aria-controls': "address", role: "tab", 'data-toggle': "tab"} Address
@@ -27,11 +27,11 @@
               .col-md-5.mb-40
                 .visible-xs.visible-sm
                   %h3.general-subtitle.mt-0 Billing Address
-                =render 'address_form', object: @billing, type: 'billing'
+                =render 'address_form', object: @billing, type: :billing
               .col-md-5.mb-40.col-md-offset-1.mb-25
                 .visible-xs.visible-sm
                   %h3.general-subtitle.mt-0 Shipping Address
-                =render 'address_form', object: @shipping, type: 'shipping'
+                =render 'address_form', object: @shipping, type: :shipping
 
         #privacy.tab-pane.fade{role: "tabpanel"}
           .row.mb-60

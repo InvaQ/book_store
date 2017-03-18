@@ -1,5 +1,6 @@
-= simple_form_for object, url: update_address_path, method: :patch, data: {type: "#{type}_address"},  html: { id: "#{type}_address" } do |f|
-  =render 'fields', field: f, type: "#{type}_address"
-  .mb-40
-  .text-center.general-text-align
-    = f.button :submit, class: "btn btn-default mb-35"
+= simple_form_for current_user, url: update_address_path do |f|
+  =f.simple_fields_for type, object do |item_field|
+    =render 'fields', field: item_field
+    .mb-40
+      .text-center.general-text-align
+        = f.button :submit, class: "btn btn-default mb-35"

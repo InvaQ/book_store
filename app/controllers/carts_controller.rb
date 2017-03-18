@@ -1,9 +1,5 @@
 class CartsController < ApplicationController
-  include Rectify::ControllerHelpers
-  include CurrentOrder
-
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-  
+  include Rectify::ControllerHelpers  
 
   def show
    
@@ -14,19 +10,13 @@ class CartsController < ApplicationController
   end
 
   def update
+    binding.pry
     UpdateCart.call(params, @order) do
-      on(:update_cart) { redirect_to cart_path(id: session[:cart_id]) }
+      on(:update_cart) { redirect_to cart_path(id: session[:order_id]) }
       on(:to_checkout) {redirect_to checkout_path(:address)}
-      on(:invalid) {redirect_to cart_path(id: session[:cart_id]) }
+      on(:invalid) {redirect_to cart_path(id: session[:order_id]) }
     end    
   end
-
-  def destroy    
-    @cart.destroy if @cart.id == session[:cart_id]
-    session[:cart_id] = nil
-    redirect_to root_path
-  end
-
 
 
 private

@@ -1,8 +1,7 @@
 class BooksController < ApplicationController
   include Rectify::ControllerHelpers
   load_and_authorize_resource only: [ :show, :update]
-
-
+  
   def index
   
   end
@@ -20,12 +19,18 @@ class BooksController < ApplicationController
       on(:invalid) do |form|
         expose form: form
         flash_render :show, alert: 'awdsdefg'
-
       end
     end
-
   end
 
+  def create_line_item
+    @line_item = @order.add_book(params[:id], line_item_params[:quantity])   
+    if @line_item.save
+      redirect_to :back 
+    else
+      render action: 'new'#render flash
+    end
+  end
 
 private
 
@@ -35,6 +40,10 @@ private
 
   def review_params
     params.require(:review).permit(:title, :description, :rate)
+  end
+
+  def line_item_params
+    params.require(:book).permit(:quantity)
   end
 
 end

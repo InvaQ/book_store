@@ -1,28 +1,28 @@
 class StepAddress < Rectify::Command
 
-def initialize(params ,object)
-  @params = params
-  @mark = params[:use_billing]
-  @object = object 
-end
+  def initialize(params, object)
+    @params = params
+    @use_billing = params[:use_billing]
+    @order = object 
+  end
 
-  def call
-    return broadcast(:invalid, @shipping_params, @billing_params ) if check_shipping_params.invalid? || check_billing_params.invalid?  
-      broadcast(:ok) if change_address
+  def call     
+    check_shipping_params
+    check_billing_params
+    @shipping_params = 
+      use_billing? ? @billing_params.dup : @shipping_params
+    return broadcast(:invalid, @shipping_params, @billing_params ) if forms_valid?
+    broadcast(:ok) if change_address
   end
 
   private
   attr_reader :params
 
   def change_address
-  
-    @billing_params = @mark == "on" ? @shipping_params.dup : @billing_params  
-    
-    ShippingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @object.id })
-    .update(@shipping_params.to_h.except(:id))
-    BillingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @object.id })
-    .update(@billing_params.to_h.except(:id) )
-    
+    ShippingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @order.id })
+    .update(@shipping_params.attributes)
+    BillingAddress.find_or_create_by({ addressable_type: 'Order', addressable_id: @order.id })
+    .update(@billing_params.attributes)    
   end
 
   def address_params
@@ -36,6 +36,14 @@ end
 
   def check_billing_params
     @billing_params = AddressesForm.from_params(address_params[:billing])
+  end
+
+  def use_billing?
+    @use_billing == "on"
+  end
+
+  def forms_valid?
+    @shipping_params.invalid? || @billing_params.invalid?
   end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306122433) do
+ActiveRecord::Schema.define(version: 20170316130327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,11 +56,6 @@ ActiveRecord::Schema.define(version: 20170306122433) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "materials"
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -120,14 +115,12 @@ ActiveRecord::Schema.define(version: 20170306122433) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "book_id"
-    t.integer  "cart_id"
     t.integer  "quantity",                           default: 1
     t.decimal  "price",      precision: 8, scale: 2
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.integer  "order_id"
     t.index ["book_id"], name: "index_line_items_on_book_id", using: :btree
-    t.index ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
     t.index ["order_id"], name: "index_line_items_on_order_id", using: :btree
   end
 
@@ -176,9 +169,15 @@ ActiveRecord::Schema.define(version: 20170306122433) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.boolean  "admin"
+    t.string   "provider"
+    t.string   "uid"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -189,7 +188,6 @@ ActiveRecord::Schema.define(version: 20170306122433) do
   add_foreign_key "credit_cards", "users"
   add_foreign_key "deliveries", "countries"
   add_foreign_key "line_items", "books"
-  add_foreign_key "line_items", "carts"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"

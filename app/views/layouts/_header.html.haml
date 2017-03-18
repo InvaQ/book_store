@@ -11,14 +11,18 @@
       %a.shop-link.pull-right.visible-xs{href: "#"}
         %span.shop-icon
           %span.shop-quantity 3
-    -if session[:cart_id]
-      %a.shop-link.pull-right.hidden-xs{href: cart_path(id: session[:cart_id])}
+    -if @order
+      %a.shop-link.pull-right.hidden-xs{href: cart_path(id: session[:order_id])}
         %span.shop-icon
           %span.shop-quantity 
             = @order.amount_of_books
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .hidden-xs
         %ul.nav.navbar-nav
+          %li
+            = link_to t('language.en'), url_for(locale: :en)
+          %li
+            = link_to t('language.ru'), url_for(locale: :ru)
           %li
             %a{href: "/"} Home
           %li.dropdown

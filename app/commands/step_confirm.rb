@@ -1,19 +1,23 @@
 class StepConfirm < Rectify::Command
 
-  initialize(params, object)
-    @params = params
-    @object = object
+  def initialize(params, object)
+    binding.pry
+    @params = params[:place_order]
+    @order = object
   end
 
   def call
-    if place_order_params == true
-    broadcast(:ok, @object)
+    binding.pry
+    return broadcast(:invalid) if @params == true
+    broadcast(:ok) if place_order
   end
 
 private
 
-  def place_order_params
-    @params.permit(:place_order)
+  def place_order
+    @order.place_order
+    @order.updated_at = Time.now
+    @order.save
   end
 
   def send_email
