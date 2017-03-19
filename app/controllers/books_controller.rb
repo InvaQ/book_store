@@ -8,7 +8,9 @@ class BooksController < ApplicationController
 
   def show    
     @previous_path = cookies['my_previous_url']
-    @review_form = ReviewForm.new  
+    present BookPresenter.new(book: @book)
+    @review_form = ReviewForm.new
+
   end
 
   def update

@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-%html
-  %head
-    %meta{charset: "UTF-8"}
-    %meta{name: "viewport", content: "width=device-width"}
-    %title Bookstore
-    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
-    %link{href: "../css/style.css", rel: "stylesheet"}
-  %body    
-    %main.container.general-main-wrap      
-      =render 'steps', steps: @steps
-      %h3.general-subtitle Delivery
-      .visible-xs
-      = form_tag checkout_path, class: 'delivery_form', method: :patch do
-        .hidden-xs.mb-res-50
-          = render 'deliveries/deliveries_md', deliveries: @order
-      
-        = render 'orders/order_summary', object: @order, components: [:coupon, :delivery]
-      
-        .col-md-12.mb-40
-          .center-block.general-text-align.center
-            = submit_tag 'save_and_continue', class: 'button btn btn-default mb-20'
-    
-    %script{src: "https://use.fontawesome.com/67602d7308.js"}
-    %script{src: "../../javascripts/jquery.js"}
-    %script{src: "../../javascripts/bootstrap.js"}
+%main.container.general-main-wrap      
+  =render 'steps', steps: @steps
+  %h3.general-subtitle Delivery
+  .visible-xs
+  = form_tag checkout_path, class: 'delivery_form', method: :patch do
+    .hidden-xs.mb-res-50
+      = render 'deliveries/deliveries_md', deliveries: @order
+    = render 'orders/order_summary'
+    .col-md-12.mb-40
+      .center-block.general-text-align.center
+        = submit_tag 'save_and_continue', class: 'button btn btn-default mb-20'

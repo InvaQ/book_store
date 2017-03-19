@@ -2,19 +2,15 @@ class CartsController < ApplicationController
   include Rectify::ControllerHelpers  
 
   def show
-   
+    present OrderSummaryPresenter.new(order: @order)
   end
 
-  def edit
-
-  end
 
   def update
-    binding.pry
     UpdateCart.call(params, @order) do
-      on(:update_cart) { redirect_to cart_path(id: session[:order_id]) }
+      on(:update_cart) { redirect_to cart_path(id: session[:cart_id]) }
       on(:to_checkout) {redirect_to checkout_path(:address)}
-      on(:invalid) {redirect_to cart_path(id: session[:order_id]) }
+      on(:invalid) {redirect_to cart_path(id: session[:cart_id]) }
     end    
   end
 

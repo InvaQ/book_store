@@ -9,9 +9,7 @@
             %a.nav-link{href: catalog_index_path} Shop
           %li
             %a.nav-link{href: "#"} Orders
-          %li
-            - if user_signed_in?
-              %a.nav-link{href: settings_path(current_user)} Settings
+          
       .col-sm-3
         %p.general-nav-mail support@bookstore.com
         %p.general-nav-number (555)-555-5555

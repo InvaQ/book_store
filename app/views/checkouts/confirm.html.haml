@@ -1,64 +1,49 @@
-<!DOCTYPE html>
-%html
-  %head
-    %meta{charset: "UTF-8"}
-    %meta{name: "viewport", content: "width=device-width"}
-    %title Bookstore
-    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
-    %link{href: "../css/style.css", rel: "stylesheet"}
-  %body
-    %main.container.general-main-wrap
-      = render 'steps', steps: @steps
-      .row.mb-20
-
-        .col-sm-3
-          %h3.general-subtitle Shipping Address
-          %p.general-address
-            =@order.shipping_address.first_name
-            %span.general-edit= link_to t('edit'), checkout_path(:address)
-            %br
-            =@order.shipping_address.address
-            %br
-            =@order.shipping_address.city
-            %br
-            =@order.shipping_address.country_id
-            %br
-            =@order.shipping_address.phone
-        .col-sm-3
-          %h3.general-subtitle Billing Address
-          %p.general-address
-            =@order.billing_address.first_name
-            %span.general-edit= link_to t('edit'), checkout_path(:address)
-            %br
-            =@order.billing_address.address
-            %br
-            =@order.billing_address.city
-            %br
-            =@order.billing_address.country_id
-            %br
-            =@order.billing_address.phone
-        .col-sm-3
-          %h3.general-subtitle Shipments
-          %p.general-address
-            = @order.delivery.name
-            %span.general-edit= link_to 'edit', checkout_path(:delivery)
-            %br
-            = @order.delivery.transfer
-        .col-sm-3
-          %h3.general-subtitle Payment Information
-          %p.general-address
-            = @order.credit_card.number
-            %span.general-edit= link_to 'edit', checkout_path(:payment)
-            %br
-            = @order.credit_card.expiry_year
-      .visible-xs
-        
-      .hidden-xs.divider-lg.pt-20
-        =render 'carts/table', line_items: @order.line_items
-      = render 'orders/order_summary', object: @order, components: [:coupon, :delivery]
-      .text-center
-        = button_to 'place_order', checkout_path, method: :patch, params: {place_order: true }, class: 'btn btn-default mb-20'
-   
-    %script{src: "https://use.fontawesome.com/67602d7308.js"}
-    %script{src: "../../javascripts/jquery.js"}
-    %script{src: "../../javascripts/bootstrap.js"}
+%main.container.general-main-wrap
+  = render 'steps', steps: @steps
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle Shipping Address
+      %p.general-address
+        =@confirm_presenter.show_ship_name
+        %span.general-edit= link_to t('edit'), checkout_path(:address)
+        %br
+        =@confirm_presenter.show_ship_address
+        %br
+        =@confirm_presenter.show_ship_city_zip
+        %br
+        =@confirm_presenter.show_ship_country
+        %br
+        =@confirm_presenter.show_ship_phone
+    .col-sm-3
+      %h3.general-subtitle Billing Address
+      %p.general-address
+        =@order.billing_address.first_name
+        %span.general-edit= link_to t('edit'), checkout_path(:address)
+        %br
+        =@order.billing_address.address
+        %br
+        =@order.billing_address.city
+        %br
+        =@order.billing_address.country_id
+        %br
+        =@order.billing_address.phone
+    .col-sm-3
+      %h3.general-subtitle Shipments
+      %p.general-address
+        = @order.delivery.name
+        %span.general-edit= link_to 'edit', checkout_path(:delivery)
+        %br
+        = @order.delivery.transfer
+    .col-sm-3
+      %h3.general-subtitle Payment Information
+      %p.general-address
+        = @confirm_presenter.show_credit_card
+        %span.general-edit= link_to 'edit', checkout_path(:payment)
+        %br
+        = @order.credit_card.expiry_year
+  .visible-xs
+  .hidden-xs.divider-lg.pt-20
+    =render 'carts/table', line_items: @order.line_items
+  = render 'orders/order_summary'
+  .text-center
+    = button_to 'place_order', checkout_path, method: :patch, params: {place_order: true }, class: 'btn btn-default mb-20'

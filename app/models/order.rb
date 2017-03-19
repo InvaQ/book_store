@@ -80,14 +80,19 @@ class Order < ApplicationRecord
   end
 
   def delivry_cost
-    delivery.price
+    delivery ? delivery.price : 0.00
   end
 
   def total_cart_price
-    if delivery
-      subtotal_cart_price - coupon_cost + delivry_cost
-    else
-      subtotal_cart_price - coupon_cost
-    end
+    subtotal_cart_price - coupon_cost + delivry_cost
   end
+
+  def generate_number
+    '#R00' + id.to_s
+  end
+
+  def ordered_at
+    created_at.strftime('%B %d, %Y')
+  end
+
 end

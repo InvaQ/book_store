@@ -23,13 +23,11 @@ private
     order.coupon = @coupon if order.coupon.blank? && @coupon
     order.total_price = order.total_cart_price
     order.update_attributes(cart_params)
-     
   end
 
 
   def get_coupon_form     
       @form = CouponForm.from_params(coupon_params)
-      binding.pry
       @coupon = Coupon.find_by_code(coupon_params[:code])   
   end
 
@@ -40,7 +38,6 @@ private
   def coupon_blank?
     coupon_params[:code].blank?
   end
-
 
   def cart_params
     params.require(:order).permit(line_items_attributes: [:id, :quantity])

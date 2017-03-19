@@ -11,10 +11,10 @@ class AddressesForm < Rectify::Form
   attribute :country_id, Integer
   validates :country_id, presence: true
 
-   validates :first_name, :last_name, :city, length: { maximum: 50}
-   validates :address, length:{ maximum: 50}
-   validates :zip, length: { maximum: 10}
-  #validates :phone, format: { with: /\A\+\d{6,12}\z/ }
+  validates :first_name, :last_name, :city, length: { maximum: 50}
+  validates :address, length:{ maximum: 50}
+  validates :zip, length: { maximum: 10}, numericality: { only_integer: true}
+  validates :phone, format: { with: /\A\+\d{6,15}\z/ }
 
   
 

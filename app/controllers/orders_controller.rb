@@ -1,16 +1,19 @@
 class OrdersController < ApplicationController
-  load_and_authorize_resource only: :show
+  include Rectify::ControllerHelpers
+  before_action :authenticate_user!
 
   def index
-   # @orders = Order.all
-  end
-
-  def new  
-    @order = Order.new
+    SortOrders.call(params, current_user) do 
+      on(:ok) do |order|
+        present OrdersPresenter.new(order)
+      end      
+    end
   end
 
   def show
-
+    @order = Order.find(params[:id])
+    @confirm_presenter = ConfirmPresenter.new(order: @order).attach_controller(self)
+    present OrderSummaryPresenter.new(order: @order)
   end
 
 end

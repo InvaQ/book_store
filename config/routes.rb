@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     
   scope "(:locale)", locale: /en|ru/ do  
     resources :orders
-    resources :carts#remove! only show
+    resources :carts, only: [:show, :update]
     resources :line_items
     resources :catalog, only: [:index, :show]
     resources :checkouts, only: [:show, :update]

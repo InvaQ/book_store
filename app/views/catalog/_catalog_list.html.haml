@@ -8,8 +8,9 @@
           .general-thumb-link-wrap
             %a.thumb-hover-link{href: book_path(book)}
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            %a.thumb-hover-link{href: "#"}
+            =link_to create_line_item_book_path(id: book.id, book: {quantity: 1}), method: :post, class: 'thumb-hover-link' do
               %i.fa.fa-shopping-cart.thumb-icon
+
     .general-thumb-info{"data-id" => book.id}
       %p.general-title 
         =book.title

@@ -4,7 +4,7 @@ class CatalogController < ApplicationController
 
   def index
     @books = Book.page(params[:page] || 1).per(4)    
-    .order("#{sort_column} #{sort_direction}")
+      .order("#{sort_column} #{sort_direction}")
 
     respond_to do |format|
       format.html
@@ -13,10 +13,9 @@ class CatalogController < ApplicationController
   end
 
   def show    
-    @books = Category.find(params[:id]).books.order("#{sort_column} #{sort_direction}")
+    @books = Category.find(params[:id]).books
+      .order("#{sort_column} #{sort_direction}")
   end
-
-
   
 
   private

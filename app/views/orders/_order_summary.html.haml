@@ -4,26 +4,17 @@
     %tbody
       %tr
         %td
-          %p.font-16= 'Sub total'
-        %td
-          %p.font-16=object.subtotal_cart_price
-
-      - components.each do |component|        
+          %p.font-16=presenter.show_subtotal_cart_price          
         %tr
           %td
-            - if object.coupon != nil
-              %p.font-16= "Coupon: #{object.coupon_cost}"        
+
+            %p.font-16= presenter.show_coupon_info
         %tr
           %td
-            - if object.delivery != nil 
-              %p.font-16= "Delivery: #{object.delivry_cost}" 
-            - else
-              %p.font-16 Delivery:
+            %p.font-16= presenter.show_delivery_info
 
 
-      %tr
-        %td
-          %strong.font-18= 'order_total'
+      %tr      
         %td
           %strong#order_subtotal.font-18
-            = object.total_cart_price
+            = presenter.show_total_cart_price
