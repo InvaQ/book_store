@@ -19,5 +19,11 @@ test:
   database: book_store_test
 
 production:
-  <<: *default
-  database: book_store_prod
+  adapter: postgresql
+  encoding: unicode
+  timeout: 5000
+  database: book_store_dev
+  username: invaq
+  password: FooBar
+  port: 5432
+  pool: 5
