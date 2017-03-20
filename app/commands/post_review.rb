@@ -9,7 +9,7 @@ class PostReview < Rectify::Command
 
   def call
     return broadcast(:invalid, form) if form.invalid?    
-      broadcast(:ok, @book) if post_review
+      broadcast(:ok) if post_review
   end
 
   private
@@ -22,7 +22,6 @@ class PostReview < Rectify::Command
   
 
   def post_review
-    binding.pry
     review = form.to_h.merge(book_id: @book.id, user_id: @user.id)    
     Review.create(review)
   end

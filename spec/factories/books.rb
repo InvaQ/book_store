@@ -10,21 +10,24 @@ FactoryGirl.define do
     depth 47
     publication { rand(1990..2017) }
     price { rand(10..30) }
+    materials   { FFaker::Lorem.words.join ', ' }
     
-     before(:create) do
-
-         FactoryGirl.create(:cart)
-     end
-    #association :categories, factory: :category
-  end
-  factory :item do
-    
-    before(:create) do
-      FactoryGirl.create(:book)
-      FactoryGirl.create(:cart)
+    trait :with_authors do
+      transient do
+        number_of_authors :rand
+      end
     end
+    
 
+    trait :with_orders do
+      transient do
+        amount_of_orders 1
+      end
+
+      after(:create) do |book, value|
+        create_list :line_item, value.amount_of_orders, book: book
+      end
+    end
   end
-
   
 end

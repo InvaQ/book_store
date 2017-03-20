@@ -10,8 +10,8 @@
   klass.delete_all
 end
 
-User.create!(email: 'admin@test.com', password: 'testtest', admin: true).confirm
-User.create!(email: 'user@test.com', password: 'testtest').confirm
+User.create!(email: 'admin@test.com', password: 'Testtest00', admin: true).confirm
+User.create!(email: 'user@test.com', password: 'Testtest00').confirm
 
 
 15.times do
@@ -32,7 +32,7 @@ Book.all.each_with_index do |book, index|
   book.authors.create!(first_name: 'Vitaly',last_name: 'Friedman')
   book.pictures.create!(image_url: "#{index+1}.jpg")
   3.times do
-  book.pictures.create!(image_url: "22.jpg")
+    book.pictures.create!(image_url: "22.jpg")
   end
   book.categories << Category.first if index.even?    
 end
@@ -49,3 +49,4 @@ end
 end
 Coupon.create!(code: '123', discount: 50)
 Coupon.create!(code: '1234', discount: 10)
+

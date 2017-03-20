@@ -28,14 +28,15 @@ ru:
         phone: Введите телефон в соответствие с кодом вашей страны
       review:
         title: Введите Заголовок
-        grade: Введите Оценку (от 1 до 5)
-        desc: Напишите Мнение
+        rate: Введите Оценку (от 1 до 5)
+        description: Напишите Мнение
       coupon:
         code: Введите Код Вашего Купона
       credit_card:
         number: Введите Номер Карты
         name: Введите Имя На Карте
-        month_year: ММ / ГГ
+        exp_month: ММ
+        exp_year: ГГ
         cvv: CVV
     labels:
       user:
@@ -59,17 +60,17 @@ ru:
         shipping: :"simple_form.labels.address"
         billing: :"simple_form.labels.address"
       credit_card: :"simple_form.placeholders.credit_card"
-      book:
+      book: 
         title: Заголовок
-        desc: Описание
+        description: Описание
         price: Цена
         count: Количество
         author: Автор
         categories: Категории
       review:
         title: Заголовок
-        grade: Оценка
-        desc: Мнение
+        rate: Оценка
+        description: Мнение
       author:
         first_name: Имя
         last_name: Фамилию
@@ -89,3 +90,4 @@ ru:
       log_in: Войти
       sign_up: Зарегистрироваться
       required_fields: все поля являются обязательными
+  

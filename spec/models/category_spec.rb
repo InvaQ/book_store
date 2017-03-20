@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'associations' do
+      it { should have_many(:categorizations)   }  
+      it { should have_many(:books).through(:categorizations)   }
+    end
+
+ 
 end

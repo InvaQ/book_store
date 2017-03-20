@@ -39,5 +39,12 @@ class ApplicationController < ActionController::Base
   def default_url_options
   { locale: I18n.locale }
   end
+
+
+  def to_back
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
   
 end

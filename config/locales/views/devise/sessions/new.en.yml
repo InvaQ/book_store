@@ -1,5 +1,0 @@
-en:
-  devise:
-    sessions:
-      new:
-        not_account?: Don’t have an Account?

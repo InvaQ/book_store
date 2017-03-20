@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   def update
     PostReview.call(@book, current_user, review_params) do
-      on(:ok) do |book|
+      on(:ok) do
         redirect_to book_path, notice: "review sent"
       end
       on(:invalid) do |form|
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   def create_line_item
     @line_item = @order.add_book(params[:id], line_item_params[:quantity])   
     if @line_item.save
-      redirect_to :back 
+      to_back
     else
       render action: 'new'#render flash
     end

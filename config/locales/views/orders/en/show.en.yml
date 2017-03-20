@@ -1,4 +1,0 @@
-en:
-  orders:
-    show:
-      order_id: "Order #%{id}"

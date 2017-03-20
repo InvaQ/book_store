@@ -1,15 +1,18 @@
 ru:
-  welcome: Добро пожаловать в BookStore, %{name}
-  home: Главная
-  shop: Магазин
-  account: Мой аккаунт
-  settings: Настройки
-  orders:
-    title: Заказы
-  buy_now: Купить сейчас
-  log_in: Войти
-  sign_up: Регистрация
-  log_out: Выйти
+  home:
+    index:
+      wellcome: Добро пожаловать в BookStore
+      home: Главная
+      shop: Магазин
+      best_sellers: Бестселлеры
+      account: Мой аккаунт
+      settings: Настройки
+      orders:
+        title: Заказы
+      buy_now: Купить сейчас
+      log_in: Войти
+      sign_up: Регистрация
+      log_out: Выйти
   or: или
   cancel: Отмена
   confirm_intentions: Вы должны подтвердить свое намерение
@@ -29,7 +32,7 @@ ru:
   dashboard: Панель администратора
   confirm_account: Подтвердить аккаунт
   language:
-    title: Язык
+    
     en: Английский
     ru: Русский
   users:

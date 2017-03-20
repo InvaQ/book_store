@@ -3,7 +3,7 @@ module CurrentOrder
 
   private
 
-  def set_order    
+  def set_order
     @order = Order.find(session[:order_id])
   rescue ActiveRecord::RecordNotFound
     @order = Order.create
