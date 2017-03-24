@@ -1,6 +1,6 @@
 require 'ffaker'
 
-[Book,Author, Picture, Category, Country, User, Coupon, Delivery].each do |klass|
+[LineItem, Book, Author, Picture, Category, Country, User, Coupon, Delivery ].each do |klass|
   klass.delete_all
 end
 
@@ -8,7 +8,7 @@ User.create!(email: 'admin@test.com', password: 'Testtest00', admin: true).confi
 User.create!(email: 'user@test.com', password: 'Testtest00').confirm
 
 
-15.times do
+40.times do
   Book.create!(title: FFaker::Book.title, description: FFaker::Book.description, 
     height: 12, width: 10, depth: 10, publication: rand(1999..2017), price: rand(1..30), materials: 'Hardcove, glossy paper')
 end
@@ -22,7 +22,7 @@ Book.all.each_with_index do |book, index|
   
   book.authors.create!(first_name: FFaker::Name.first_name,last_name: FFaker::Name.last_name)
   
-  book.categories << Category.first if index.even?    
+  book.categories << Category.find(rand(1..3)) #if index.even?    
 end
 
 
