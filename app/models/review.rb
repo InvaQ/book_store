@@ -5,7 +5,7 @@ class Review < ApplicationRecord
   belongs_to :user
 
   aasm column: :state, whiny_transitions: false do
-    state :unchecked, inital: true
+    state :unchecked, initial: true
     state :approved
     state :rejected
 
@@ -28,8 +28,9 @@ class Review < ApplicationRecord
     created_at.strftime('%d/%m/%y')
   end
 
-  def user_name
-    user.email
+  def verified?
+    user.orders.delivered.joins(:line_items)
+      .where('line_items.book_id = ?', book_id).any?
   end
 
 end

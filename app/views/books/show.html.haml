@@ -5,7 +5,7 @@
   .row
     .col-sm-6
       .product-gallery
-      -presenter.show_pictures.each_with_index do |picture, index|
+      -@presenter.show_pictures.each_with_index do |picture, index|
         -if index == 0
           .mb-20
             .img-responsive
@@ -15,38 +15,38 @@
             = image_tag(picture.image_url)
     .col-sm-6
       %h1.mt-res-0
-        = presenter.show_book_title
+        = @presenter.show_book_title
       %p.in-grey-600.small
-        = presenter.show_author_names
+        = @presenter.show_author_names
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
-            = presenter.show_book_price
-        =render '/shared/change_amount', object: @book
+            = @presenter.show_book_price
+        =render '/shared/change_amount', object: @presenter.book
       .pt-20.divider-lg
         %p Description
         %p.in-grey-600.small.line-height-2
-          = presenter.show_short_description
+          = @presenter.show_short_description
           %a.in-gold-500.ml-10.read-more{href: "#"} Read More              
       .pt-20.divider-lg
         .clearfix
           %p.general-item-info.pull-right
-            = presenter.show_book_publication
+            = @presenter.show_book_publication
           %p.break-word Year of publication
       .pt-20.divider-lg
         .clearfix
           %p.general-item-info.pull-right
-            =presenter.show_book_dimensions
+            =@presenter.show_book_dimensions
           %p.break-word Dimensions
       .pt-20.divider-lg
         .clearfix
           %p.general-item-info.pull-right
-            = presenter.show_book_materials
+            = @presenter.show_book_materials
           %p.break-word Materials
   .mb-80
     %h3.in-gold-500.mb-25 
-    = presenter.show_count_of_reviews
-    = render presenter.show_reviews
+    = @presenter.show_count_of_reviews
+    = render @presenter.show_reviews
     -if can? :create, Review
       .h3.in-gold-500
       = render '/reviews/review_form'

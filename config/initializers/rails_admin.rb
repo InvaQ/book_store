@@ -40,4 +40,49 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Order' do
+    list do
+      fields :id, :created_at
+      field :state, :state
+    end
+    
+
+    state({ states: {
+      complete: 'btn-info',
+      in_transit: 'btn-primary',
+      delivered: 'btn-success',
+      canceled: 'btn-danger' } })
+  end
+
+
+  config.model 'Review' do
+    list do
+      fields :title, :description, :book, :created_at, :user
+      field :state, :state
+      field :verified
+    end
+
+    show do
+      fields :title, :description, :book, :created_at, :user, :state, :verified
+    end
+
+    edit do
+      field :state, :enum do
+        enum_method do
+          :assm_states
+        end
+      end
+    end
+
+    state({
+      states: {
+        unchecked: 'btn-warning',
+        rejected: 'btn-danger',
+        approved: 'btn-success' },
+      events: {
+        approve: 'btn-success',
+        reject: 'btn-danger' }
+    })
+  end
 end

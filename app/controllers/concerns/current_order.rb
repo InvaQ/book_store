@@ -8,7 +8,6 @@ module CurrentOrder
   rescue ActiveRecord::RecordNotFound
     @order = Order.create
     session[:order_id] = @order.id
-    session[:cart_id] = @order.id
   end
 
 end

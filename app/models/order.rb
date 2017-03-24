@@ -56,7 +56,7 @@ class Order < ApplicationRecord
   def add_book(book_id, quantity)
     current_item = line_items.find_by(book_id: book_id)
     if current_item
-      current_item.quantity += quantity
+      current_item.quantity += quantity.to_i
     else
       current_item = line_items.build(book_id: book_id, quantity: quantity)
       current_item.price = current_item.book.price
@@ -66,7 +66,7 @@ class Order < ApplicationRecord
 
 
   def amount_of_books
-    self.line_items.sum('quantity')
+    line_items.sum('quantity')
   end
 
   def subtotal_cart_price

@@ -1,5 +1,9 @@
 class BookPresenter < Rectify::Presenter
-  attribute :book, Book
+  def initialize(book, review = nil)
+    @book = book
+    @review = review
+  end
+  attr_reader :book
 
   def show_book_title
     book.title
@@ -30,16 +34,25 @@ class BookPresenter < Rectify::Presenter
   end
 
   def show_count_of_reviews
-    amount = book.reviews.count
-    amount == 0 ? 'There are no comments yet. Be first!' : amount
+    amount = show_reviews.count
+    amount == 0 ? 'There are no reviews yet. Be the first!' : "Reviews(#{amount})"
   end
 
-  def show_reviews
-    book.reviews
+  def show_reviews    
+    book.reviews.where(state: 'approved')
   end
 
   def show_pictures
     book.pictures
   end
+  def previous_path
+    cookies['my_previous_url']
+  end
+    
+    def review_form
+      @review || ReviewForm.new
+    end
+
+  
 
 end

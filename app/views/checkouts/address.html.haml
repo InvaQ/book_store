@@ -11,20 +11,21 @@
       .col-md-5.mb-40
         .visible-xs.visible-sm
           %h3.general-subtitle.mt-0 Billing Address
-        = field.simple_fields_for :billing, @billing do |item_field|   
+        = field.simple_fields_for :billing, @address_presenter.billing do |item_field|   
           = render 'users/fields', field: item_field
       .col-md-5.mb-40.col-md-offset-1.mb-25
         .visible-xs.visible-sm
           %h3.general-subtitle.mt-0 Shipping Address
-        = field.simple_fields_for :shipping, @shipping do |item_field|
-          = render 'users/fields', field: item_field
+        #shipping_from{style: "display:#{session[:use_billing] ? 'none' : ''}"}
+          = field.simple_fields_for :shipping, @address_presenter.shipping do |item_field|
+            = render 'users/fields', field: item_field
 
         .form-group.checkbox
-          %label.checkbox-label
-            = check_box_tag :use_billing, nil, class: 'checkbox-input', hidden: 'hidden', id: 'use_billing'
+          %label.font-weight-light.pl-0
+            = check_box_tag :use_billing, nil, session[:use_billing], class: 'checkbox-input', hidden: 'hidden', id: 'use_billing'
             %span.checkbox-icon
               %i.fa.fa-check
-            %span.checkbox-text use_billing
+            %span.checkbox-text use billing
     = render 'orders/order_summary'
     .col-md-12.mb-40
       .center-block.general-text-align.center        

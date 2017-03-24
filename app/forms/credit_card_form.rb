@@ -17,7 +17,8 @@ class CreditCardForm < Rectify::Form
   validates :expiry_month, format: { with: /\A(0?[1-9]|1[012])\z/ }
   validates :expiry_year,  length: { is: 4}
   validates_each :expiry_year do |record, attr, value|
-    record.errors.add attr, 'expiry year must not be earlier than 6 months' if value < (Time.now + 6.month).year
+
+    record.errors.add attr, 'expiry year must not be earlier than 6 months from today' if value.to_i < (Time.now + 6.month).year
   end
 
   private

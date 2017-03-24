@@ -7,7 +7,10 @@ class Ability
     
     if user
       if user.admin?
-        can :manage, :all
+        can :read, [Address , User]
+        #can :all_events, Order
+        can :manage, [Book, Author, Category, Review, Picture,
+                      Delivery, Coupon, Order]
         can :all_events, Order
         can :access, :rails_admin
         can :dashboard

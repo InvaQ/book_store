@@ -6,16 +6,14 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
-
-      %a.shop-link.pull-right.visible-xs{href: "#"}
-        %span.shop-icon
-          %span.shop-quantity 3
-    -if session[:cart_id]
-      %a.shop-link.pull-right.hidden-xs{href: cart_path(id: session[:cart_id])}
-        %span.shop-icon
+      %a.navbar-brand Bookstore      
+    
+    %a.shop-link.pull-right.hidden-xs{href: cart_path(id: session[:order_id])}
+      %span.shop-icon
+        -if session[:order_id]
           %span.shop-quantity 
             = @order.amount_of_books
+
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .hidden-xs
         %ul.nav.navbar-nav

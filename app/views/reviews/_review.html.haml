@@ -10,10 +10,11 @@
         -if review.verified?
           %h4.media-heading.max-240.general-message-name
             %span.general-message-verified Verified Reviewer
-            =review.user_name
       .mb-15
         - review.rate.times do
           %i.fa.fa-star.rate-star
+        - (5 - review.rate).times do
+          %i.fa.fa-star.rate-star.rate-empty  
       %p= review.title
       %p= review.description
 

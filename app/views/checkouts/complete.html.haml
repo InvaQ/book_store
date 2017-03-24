@@ -10,7 +10,6 @@
         %p.general-address.mb-30 October 29, 2016
       %p.general-address
         =@complete_presenter.show_ship_name
-        %span.general-edit edit
         %br
         =@complete_presenter.show_ship_address
         %br
@@ -23,7 +22,6 @@
       %p.general-order-number.mb-0=@complete_presenter.show_order_number
       %p.general-address.mb-30=@complete_presenter.show_order_date
   .visible-xs
-    
   .hidden-xs.divider-lg.pt-20
     =render 'carts/table', line_items: @order.line_items
   = render 'orders/order_summary'

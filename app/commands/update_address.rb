@@ -7,7 +7,7 @@ class UpdateAddress < Rectify::Command
 
   def call
     check_params
-    return broadcast(:invalid) if form.invalid?    
+    return broadcast(:invalid, @type, @form) if form.invalid?    
     broadcast(:ok) if change_address
   end
 
@@ -15,7 +15,7 @@ class UpdateAddress < Rectify::Command
   attr_reader :params, :form
 
   def change_address
-    "#{address_params.keys[0].capitalize}Address".constantize
+    "#{@type.capitalize}Address".constantize
       .find_or_create_by({ addressable_type: 'User', addressable_id: @user.id })
         .update(form.attributes)
   end
@@ -26,7 +26,8 @@ class UpdateAddress < Rectify::Command
   end
 
   def check_params
-    @form = AddressesForm.from_params(address_params.values[0])    
+    @form = AddressesForm.from_params(address_params.values[0])
+    @type = address_params.keys[0]
   end
 
 end

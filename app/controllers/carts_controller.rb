@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
-  include Rectify::ControllerHelpers  
+  include Rectify::ControllerHelpers
+ 
 
   def show
     present OrderSummaryPresenter.new(order: @order)
@@ -8,9 +9,9 @@ class CartsController < ApplicationController
 
   def update
     UpdateCart.call(params, @order) do
-      on(:update_cart) { redirect_to cart_path(id: session[:cart_id]) }
+      on(:update_cart) { redirect_to cart_path(id: session[:order_id]) }
       on(:to_checkout) {redirect_to checkout_path(:address)}
-      on(:invalid) {redirect_to cart_path(id: session[:cart_id]) }
+      on(:invalid) {redirect_to cart_path(id: session[:order_id]) }
     end    
   end
 
@@ -21,5 +22,7 @@ private
     redirect_to send("#{path}_path", params)#,
                 #notice: t('flash.success.cart_update')
   end
+
+  
 
 end

@@ -1,14 +1,13 @@
 class StepAccessibility < Rectify::Command
 
-  def initialize(step, object)  
-
+  def initialize(step, object)
     @step = step
     @order = object
-
   end
 
   def call
-    return broadcast(:wrong_url) if @order.line_items.empty? && @step == :complete
+    return broadcast(:wrong_url) if pointless_request?
+    return broadcast(:empty_cart) if @order.line_items.empty?     
     allowed_step? ? broadcast(:ok) : broadcast(:not_allowed)
   end
 
@@ -36,6 +35,10 @@ class StepAccessibility < Rectify::Command
 
   def has_payment?
     @order.credit_card
+  end
+
+  def pointless_request?
+    @order.state == 'complete' && @step != :complete 
   end
 
 end

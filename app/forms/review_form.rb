@@ -1,9 +1,14 @@
 class ReviewForm < Rectify::Form
-  STR_ATTRS = [:title, :description, :state].freeze
-  INT_ATTRS = [:rate, :book_id, :user_id].freeze
+  STR_ATTRS = [:title, :description].freeze
 
-  STR_ATTRS.each { |str| attribute str, String }
-  INT_ATTRS.each { |int| attribute int, Integer}
+  STR_ATTRS.each do |str| 
+    attribute str, String 
+    validates str, presence: true
+  end
+ 
+  attribute :rate, Integer
+  validates :rate, presence: true
+ 
 
   validates :title, length: { maximum: 80 }
   validates :description, length: { maximum: 500 }

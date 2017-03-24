@@ -1,17 +1,20 @@
 class UsersController < ApplicationController
   include Rectify::ControllerHelpers
   before_action :authenticate_user!
-  before_action :set_addresses_forms,  only: [:settings]
   before_action :set_countries
  
+  def settings
+    present AddressesPresenter.new
+  end
 
   def update_address
     UpdateAddress.call(params, current_user) do
       on(:ok) do 
         success
       end
-      on(:invalid) do
-        error
+      on(:invalid) do |*attrs|        
+        present AddressesPresenter.new(*attrs)
+        render 'settings'
       end      
     end
   end
@@ -37,10 +40,6 @@ class UsersController < ApplicationController
 
 private
   
-  def set_addresses_forms
-    @billing = current_user.billing_address
-    @shipping = current_user.shipping_address
-  end
 
   def set_countries
     @countries = Country.select(:id, :name)
@@ -55,8 +54,9 @@ private
   end
 
   def error
-    #flash_render 'settings', 
-    #alert: "info can't be changed" 
+    present AddressesPresenter.new      
+    render action: 'settings'
   end
+
 
 end

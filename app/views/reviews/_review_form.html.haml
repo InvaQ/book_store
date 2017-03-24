@@ -1,12 +1,11 @@
-= simple_form_for @book, as: @review_form, id: 'review_form' do |f|
+= simple_form_for @book, as: @presenter.review_form, id: 'review_form' do |f|
   .form-group
-    = f.input :title
+    = f.input :title, input_html: {value: current_user.email}
   .form-group
     = f.input :rate, class: '' do
       .rate-fields
-        - 5.downto(1).each do |star|
-          = f.radio_button :rate, star, id: "rate_#{star}",
-            class: 'input-star', hidden: true
+        -5.downto(1).each do |star|
+          = f.radio_button :rate, star,  class: 'input-star'
           %label.label-star{ for: "rate_#{star}" }
             %i.fa.fa-star.rate-empty
   .form-group

@@ -12,7 +12,6 @@ class Book < ApplicationRecord
   validates :title, uniqueness: true
   
 
-
   def get_author_names
     authors.collect {|author| author.name }.join(', ')
   end

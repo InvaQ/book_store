@@ -7,20 +7,19 @@ class BooksController < ApplicationController
   end
 
   def show    
-    @previous_path = cookies['my_previous_url']
-    present BookPresenter.new(book: @book)
-    @review_form = ReviewForm.new
+    render_with_presenter
 
   end
 
   def update
+    
     PostReview.call(@book, current_user, review_params) do
       on(:ok) do
         redirect_to book_path, notice: "review sent"
       end
       on(:invalid) do |form|
-        expose form: form
-        flash_render :show, alert: 'awdsdefg'
+        render_with_presenter(form)
+        render 'show'
       end
     end
   end
@@ -35,6 +34,11 @@ class BooksController < ApplicationController
   end
 
 private
+
+  def render_with_presenter(review = nil)
+    @presenter =  BookPresenter.new(@book, review)
+    @previous_path = cookies['my_previous_url']
+  end
 
   def book_params
     params.require(:book).permit(:title, :description, :image_url, :price)

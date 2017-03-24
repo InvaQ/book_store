@@ -3,7 +3,7 @@ class StepAddress < Rectify::Command
   def initialize(params, object)
     @params = params
     @use_billing = params[:use_billing]
-    @order = object 
+    @order = object
   end
 
   def call     
@@ -11,8 +11,8 @@ class StepAddress < Rectify::Command
     check_billing_params
     @shipping_params = 
       use_billing? ? @billing_params.dup : @shipping_params
-    return broadcast(:invalid, @shipping_params, @billing_params ) if forms_valid?
-    broadcast(:ok) if change_address
+    return broadcast(:invalid,  @billing_params, @shipping_params) if forms_valid?
+    broadcast(:ok, @order) if change_address
   end
 
   private
@@ -39,11 +39,12 @@ class StepAddress < Rectify::Command
   end
 
   def use_billing?
+    session[:use_billing] = params[:use_billing]
     @use_billing == "on"
   end
 
   def forms_valid?
-    @shipping_params.invalid? || @billing_params.invalid?
+    @shipping_params.invalid? && @billing_params.invalid?
   end
 
 end

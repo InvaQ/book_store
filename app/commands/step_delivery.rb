@@ -7,7 +7,7 @@ class StepDelivery < Rectify::Command
 
   def call
     return broadcast(:invalid) unless valid?  
-    broadcast(:ok) if add_delivery
+    broadcast(:ok, @order) if add_delivery
   end
 
   private
