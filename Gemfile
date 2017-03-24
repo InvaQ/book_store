@@ -38,9 +38,9 @@ gem 'cancancan'
 gem 'dotenv-rails'
 
 
-# gem 'carrierwave'
-# gem 'carrierwave-dropbox'
-# gem 'mini_magick'
+ gem 'carrierwave'
+ gem 'carrierwave-dropbox'
+ gem 'mini_magick'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

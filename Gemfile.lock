@@ -62,6 +62,15 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
+    carrierwave-dropbox (1.2.1)
+      carrierwave (~> 0.9)
+      dropbox-sdk (~> 1.6)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -88,6 +97,8 @@ GEM
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
+    dropbox-sdk (1.6.5)
+      json
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -130,6 +141,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    json (2.0.3)
     jwt (1.5.6)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
@@ -153,6 +165,8 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
+    mini_magick (4.6.1)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
@@ -351,6 +365,8 @@ DEPENDENCIES
   bootstrap-sass
   cancancan
   capybara
+  carrierwave
+  carrierwave-dropbox
   coffee-rails (~> 4.2)
   database_cleaner
   devise
@@ -363,6 +379,7 @@ DEPENDENCIES
   kaminari
   letter_opener_web
   listen (~> 3.0.5)
+  mini_magick
   newrelic_rpm
   omniauth
   omniauth-facebook

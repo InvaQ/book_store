@@ -20,6 +20,10 @@ class Book < ApplicationRecord
     "H:#{self.height}\" x W: #{self.width}\" x D: #{self.depth}\""
   end
 
+  def main_picture
+    pictures.first || ImageUploader.new.default_url
+  end
+
   
 
 end

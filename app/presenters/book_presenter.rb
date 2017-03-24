@@ -43,7 +43,7 @@ class BookPresenter < Rectify::Presenter
   end
 
   def show_pictures
-    book.pictures
+    book.main_picture
   end
   def previous_path
     cookies['my_previous_url']

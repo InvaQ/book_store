@@ -12,7 +12,7 @@
             .col-sm-5
               .general-img-wrap
                 %img.img-shadow.general-thumbnail-img
-                  =image_tag(book.pictures.first.image_url)
+                  =image_tag(book.main_picture)
             .col-sm-7
               .mb-60
                 %h1=book.title
@@ -41,7 +41,7 @@
           .general-thumb-wrap
             .thumbnail.general-thumbnail
               %img.img-shadow.general-thumbnail-img
-                =image_tag(bestseller.pictures.first.image_url)
+                =image_tag(bestseller.main_picture)
               .thumb-hover
                 .general-thumb-link-wrap
                   %a.thumb-hover-link{href:  book_path(bestseller)}
