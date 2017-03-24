@@ -18,7 +18,7 @@ gem 'pg'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'simple_form'
-
+gem 'ffaker'
 
 gem 'aasm'
 gem 'rails_admin'
@@ -61,7 +61,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'ffaker'
+  
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
 end
