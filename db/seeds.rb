@@ -4,8 +4,8 @@ require 'ffaker'
   klass.delete_all
 end
 
-User.create!(email: 'admin@test.com', password: 'Testtest00', admin: true).confirm
-User.create!(email: 'user@test.com', password: 'Testtest00').confirm
+User.create!(email: 'admin@test.com', password: 'Testtest00', admin: true)
+User.create!(email: 'user@test.com', password: 'Testtest00')
 
 
 40.times do
@@ -19,10 +19,8 @@ Category.create!(name: 'Web Design')
 
 
 Book.all.each_with_index do |book, index|
-  
   book.authors.create!(first_name: FFaker::Name.first_name,last_name: FFaker::Name.last_name)
-  
-  book.categories << Category.find(rand(1..3)) #if index.even?    
+  book.categories << Category.find(rand(1..3))   
 end
 
 
