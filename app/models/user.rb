@@ -8,9 +8,9 @@ class User < ApplicationRecord
   
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_one :billing_address, as: :addressable, dependent: :destroy
-  validates :email, :password, presence: true
+  #validates :email, :password, presence: true
   #validates :email, format: {with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/iu }
-  validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}\z/}
+  #validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}\z/}
   #has_one :avatar, as: :imageable
 
   def self.from_omniauth(auth)
@@ -19,8 +19,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.create_billing_address(first_name: auth.info.first_name)
       user.create_billing_address(last_name: auth.info.last_name)
-      
-      
+      user
     end
   end
 
