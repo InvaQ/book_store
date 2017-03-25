@@ -5,8 +5,16 @@
   .row
     .col-sm-6
       .product-gallery
-        .img-responsive
-          =image_tag @presenter.show_pictures
+        
+        -@presenter.show_pictures.each_with_index do |picture, index|
+          -if index == 0
+            .mb-20
+              .img-responsive
+                = image_tag(picture.image_url)
+          -else              
+            %a.img-link                   
+              = image_tag(picture.image_url)
+
     .col-sm-6
       %h1.mt-res-0
         = @presenter.show_book_title

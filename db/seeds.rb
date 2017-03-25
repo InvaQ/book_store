@@ -9,7 +9,7 @@ User.create!(email: 'user@test.com', password: 'Testtest00')
 
 
 40.times do
-  Book.create!(title: FFaker::Book.title, description: FFaker::Book.description, 
+  Book.create(title: FFaker::Book.title, description: FFaker::Book.description, 
     height: 12, width: 10, depth: 10, publication: rand(1999..2017), price: rand(1..30), materials: 'Hardcove, glossy paper')
 end
 
@@ -20,7 +20,14 @@ Category.create!(name: 'Web Design')
 
 Book.all.each_with_index do |book, index|
   book.authors.create!(first_name: FFaker::Name.first_name,last_name: FFaker::Name.last_name)
-  book.categories << Category.find(rand(1..3))   
+  book.categories << Category.find(rand(1..3)) 
+  4.times do 
+    book.pictures << Picture.create
+  end
+  buffer = book.pictures[0]
+  buffer.image_url = ImageUploader.new.additional_default_url
+  buffer.save
+
 end
 
 

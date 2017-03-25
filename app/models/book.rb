@@ -21,7 +21,7 @@ class Book < ApplicationRecord
   end
 
   def main_picture
-    pictures.first || ImageUploader.new.default_url
+    pictures[0].image_url || ImageUploader.new.default_url
   end
 
   
