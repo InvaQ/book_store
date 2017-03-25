@@ -11,11 +11,10 @@ class BooksController < ApplicationController
 
   end
 
-  def update
-    
+  def update    
     PostReview.call(@book, current_user, review_params) do
       on(:ok) do
-        redirect_to book_path, notice: "review sent"
+        redirect_to book_path, notice: "Thanks for Review. It will be published as soon as Admin will approve it."
       end
       on(:invalid) do |form|
         render_with_presenter(form)
@@ -29,7 +28,7 @@ class BooksController < ApplicationController
     if @line_item.save
       to_back
     else
-      render action: 'new'#render flash
+      render action: 'new',  alert: "Somthing went wrong"
     end
   end
 

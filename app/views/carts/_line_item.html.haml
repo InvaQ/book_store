@@ -22,6 +22,7 @@
   %td
     %span.font-16.in-gold-500 
       =number_to_currency(line_item.total_price)
-  %td
-    =link_to line_item_path(line_item), method: :delete, class: 'close general-cart-close' do    
-      %span{'aria-hidden': "true"} &times;
+  - if local_assigns[:field]
+    %td
+      =link_to line_item_path(line_item), method: :delete, class: 'close general-cart-close' do    
+        %span{'aria-hidden': "true"} &times;

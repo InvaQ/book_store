@@ -34,4 +34,9 @@ class CompletePresenter < Rectify::Presenter
     'Phone ' + number_to_phone(order.shipping_address.phone, area_code: true)
   end
 
+  def line_items
+    order.line_items
+  end
+  
+
 end

@@ -17,23 +17,23 @@
     .col-sm-3
       %h3.general-subtitle Billing Address
       %p.general-address
-        =@order.billing_address.first_name
+        =@confirm_presenter.show_ship_name
         %span.general-edit= link_to t('edit'), checkout_path(:address)
         %br
-        =@order.billing_address.address
+        =@confirm_presenter.show_ship_address
         %br
-        =@order.billing_address.city
+        =@confirm_presenter.show_ship_city_zip
         %br
-        =@order.billing_address.country_id
+        =@confirm_presenter.show_ship_country
         %br
-        =@order.billing_address.phone
+        =@confirm_presenter.show_ship_phone
     .col-sm-3
       %h3.general-subtitle Shipments
       %p.general-address
-        = @order.delivery.name
+        = @confirm_presenter.show_delivery_name
         %span.general-edit= link_to 'edit', checkout_path(:delivery)
         %br
-        = @order.delivery.transfer
+        = @confirm_presenter.show_delivery_transfer
     .col-sm-3
       %h3.general-subtitle Payment Information
       %p.general-address

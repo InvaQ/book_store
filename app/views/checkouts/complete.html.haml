@@ -23,7 +23,7 @@
       %p.general-address.mb-30=@complete_presenter.show_order_date
   .visible-xs
   .hidden-xs.divider-lg.pt-20
-    =render 'carts/table', line_items: @order.line_items
+    =render 'carts/table', line_items: @complete_presenter.line_items
   = render 'orders/order_summary'
   .text-center
     =link_to 'Back to Store', catalog_index_path, class: 'btn btn-default mb-20'

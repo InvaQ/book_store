@@ -29,4 +29,33 @@ class ConfirmPresenter < Rectify::Presenter
     'Order ' + order.generate_number
   end
 
+
+  def show_bill_name
+    "#{order.billing_address.first_name} #{order.billing_address.last_name}"
+  end
+
+  def show_bill_address
+    order.billing_address.address
+  end
+
+  def show_bill_city_zip
+    "#{order.billing_address.city} #{order.billing_address.zip}"
+  end
+
+  def show_bill_country
+    Country.find(order.billing_address.country_id).name
+  end
+
+  def show_bill_phone
+    'Phone ' + number_to_phone(order.billing_address.phone, area_code: true)
+  end
+
+  def show_delivery_name
+    order.delivery.name
+  end
+
+  def show_delivery_transfer
+    order.delivery.transfer
+  end
+
 end

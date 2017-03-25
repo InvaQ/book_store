@@ -42,9 +42,9 @@ class ApplicationController < ActionController::Base
 
 
   def to_back
-    redirect_to :back
+    redirect_to :back,  notice: 'Book was successfuly added to your cart'
   rescue ActionController::RedirectBackError
-    redirect_to root_path
+    redirect_to root_path,  alert: "Somthing went wrong"
   end
   
 end
