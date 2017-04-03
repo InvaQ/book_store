@@ -46,4 +46,4 @@
     =render 'carts/table', line_items: @order.line_items
   = render 'orders/order_summary'
   .text-center
-    = button_to 'place_order', checkout_path, method: :patch, params: {place_order: true }, class: 'btn btn-default mb-20'
+    = button_to 'Place order', checkout_path, method: :patch, params: {place_order: true }, class: 'btn btn-default mb-20'

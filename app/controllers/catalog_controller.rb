@@ -1,38 +1,37 @@
 class CatalogController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  include Rectify::ControllerHelpers
   before_action :get_last_url, only: [:index, :show]
-
+  
   def index
-    binding.pry
-    @books = Book.order("#{sort_column} #{sort_direction}").page(params[:page] || 1).per(4)
-
-    respond_to do |format|
-      format.html
-      format.js 
-    end
+    sort_books
   end
 
-  def show    
-    @books = Category.find(params[:id]).books.order("#{sort_column} #{sort_direction}").page(params[:page] || 1).per(4)
+  def show
+    @category = Category.find(params[:id]) if params[:id]
+    sort_books
   end
   
 
   private
 
-  def sortable_columns
-    ["title", "price", "created_at"]
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
-  def sort_column
-    sortable_columns.include?(params[:column]) ? params[:column] : "title"
-  end
-
   def get_last_url
     cookies['my_previous_url'] = request.original_url
+  end
+
+  def set_sort_type
+    session[:sort_type] =
+      params[:sort_type] ? params[:sort_type] : session[:sort_type]
+  end
+
+  def define_current_filter_title(filter)
+    @current_filter = Book::SORT_FILTERS[filter.to_sym]
+  end
+
+  def sort_books
+    set_sort_type
+    define_current_filter_title(session[:sort_type])
+    @books = SortBooks.call(@category, session[:sort_type])
+      .page(params[:page] || 1).per(4)
   end
   
    

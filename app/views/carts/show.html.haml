@@ -7,7 +7,6 @@
         .row
           .col-sm-4
           %h1.general-title-margin Cart is empty, You can add book here
-          =link_to 'Shop', catalog_index_path
     -else
       =simple_form_for @order, url: cart_path, method: :patch do |f|
         =render 'table', field: f

@@ -64,6 +64,9 @@ class Order < ApplicationRecord
     current_item
   end
 
+  def delivery_selected?(from_list)
+    delivery.id == from_list if delivery
+  end
 
   def amount_of_books
     line_items.sum('quantity')

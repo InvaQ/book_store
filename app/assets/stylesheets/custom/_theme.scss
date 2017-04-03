@@ -2,37 +2,9 @@
 
 @import "variables";
 
-// Margin helpers
-
-@each $size in (5, 10, 15, 20, 35, 55, 240) {
-  .mr-#{$size} {
-    margin-right: #{$size}px !important;
-  }
-}
-@each $size in (10, 15, 20, 30, 40, 60, 70) {
-  .ml-#{$size} {
-    margin-left: #{$size}px !important;
-  }
-}
-@each $size in (0, 5, 10, 15, 20, 25, 30, 35, 40, 55, 60, 80, 120) {
-  .mb-#{$size} {
-    margin-bottom: #{$size}px !important;
-  }
-}
-
-// Helpers
-
 .font-weight-light {
   font-weight: 300 !important;
 }
-.width-full {
-  max-width: 100%;
-}
-.relative {
-  position: relative;
-}
-
-// Navbar
 
 .navbar-inverse {
   padding-top: 30px;
@@ -50,21 +22,8 @@
 .navbar-nav .open .dropdown-menu {
   left: $dropdown-menu-position-left;
 }
-.nav-link {
-  font-size: $font-size-small;
-  color: $grey-600;
-  &:hover {
-    color: $gold-500;
-    text-decoration: none;
-  }
-  &:first-child {
-    padding-left: 0;
-  }
-}
-
-// Dropdown
-
 .dropdown-btn {
+  width: 100%;
   font-size: 14px;
   color: $grey-600;
   border: 1px solid $grey-200;
@@ -80,11 +39,11 @@
     color: $grey-600;
     line-height: 21px;
     float: right;
-    margin-left: 15px;
   }
 }
 .dropdown-menu {
-  min-width: 240px;
+  width: 100%;
+  min-width: 210px;
   > li > a {
     font-weight: 300;
     padding: 8px 30px;
@@ -92,9 +51,6 @@
     word-break: break-word;
   }
 }
-
-// Carousel
-
 .carousel {
   margin-left: -15px;
   margin-right: -15px;
@@ -124,12 +80,6 @@
     margin: 1px 4px;
   }
 }
-.item {
-  padding: 15px 12px 0;
-}
-
-// Type
-
 .lead {
   color: $grey-600;
   word-break: break-word;
@@ -137,9 +87,6 @@
 .small {
   font-size: $font-size-base;
 }
-
-// Buttons
-
 .btn {
   max-width: 100%;
   font-size: $font-size-small;
@@ -167,9 +114,9 @@
     opacity: 0.6;
   }
 }
-
-// Thumbnails
-
+.item {
+  padding: 15px 12px 0;
+}
 .thumbnail:hover,
 .thumbnail:focus,
 .thumbnail.active {
@@ -196,13 +143,6 @@
   opacity: 0;
   transition: $thumbnail-hover-transition;
 }
-.thumb-hover-link-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
-}
 .thumb-hover-link {
   width: 40px;
   height: 40px;
@@ -212,7 +152,6 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
-  background-color: transparent;
   &:hover {
     background-color: $grey-200;
     .thumb-icon {
@@ -225,9 +164,6 @@
     line-height: 36px;
   }
 }
-
-// Table
-
 .table {
   > thead,
   > tbody,
@@ -240,17 +176,6 @@
     }
   }
 }
-
-.nav-tabs > li > a {
-  color: $grey-600;
-}
-.media {
-  margin-top: 0;
-}
-
-// Custom features
-
-// Shop basket component
 
 .shop-link {
   display: inline-block;
@@ -287,9 +212,24 @@
   font-size: $font-size-small;
   color: white;
 }
-
-// Filter, collapse links
-
+.divider-sm {
+  width: 30px;
+  height: 2px;
+  display: inline-block;
+  background-color: $grey-900;
+  margin-bottom: 10px;
+}
+.nav-link {
+  font-size: $font-size-small;
+  color: $grey-600;
+  &:hover {
+    color: $gold-500;
+    text-decoration: none;
+  }
+  &:first-child {
+    padding-left: 0;
+  }
+}
 .filter-link {
   font-size: $font-size-base;
   color: $grey-600;
@@ -302,19 +242,6 @@
     text-decoration: none;
   }
 }
-.collapse-link {
-  font-size: $font-size-base;
-  color: $grey-600;
-  font-weight: 300;
-  line-height: 2.2;
-  &:hover {
-    color: $gold-500;
-    text-decoration: none;
-  }
-}
-
-// Input styles
-
 .input-link {
   font-size: $font-size-base;
   color: $grey-350;
@@ -332,9 +259,6 @@
   margin-left: 12px;
   margin-right: 12px;
 }
-
-// Logo
-
 .logo-size {
   width: 55px;
   height: 55px;
@@ -343,32 +267,25 @@
   font-size: $font-size-large;
   color: white;
   text-align: center;
-  display: block;
   background-color: $grey-350;
   line-height: 55px;
+}
+.collapse-link {
+  font-size: $font-size-base;
+  color: $grey-600;
+  font-weight: 300;
+  line-height: 2.2;
   &:hover {
+    color: $gold-500;
     text-decoration: none;
   }
 }
-
-// Rating
-
 .rate-star {
   font-size: 17px;
   color: $gold-500
 }
 .rate-empty {
   color: $grey-350;
-}
-
-// Dividers
-
-.divider-sm {
-  width: 30px;
-  height: 2px;
-  display: inline-block;
-  background-color: $grey-900;
-  margin-bottom: 10px;
 }
 .divider-lg {
   position: relative;
@@ -403,9 +320,6 @@
     margin-right: -15px;
   }
 }
-
-// Gallery
-
 .images {
   margin-left: -10px;
   margin-right: -10px;
@@ -418,9 +332,6 @@
   margin-left: 10px;
   margin-bottom: 10px;
 }
-
-// Stepper
-
 .step-number {
   width: 35px;
   height: 35px;
@@ -478,13 +389,6 @@
     font-size: 12px;
   }
 }
-
-// Checkbox, radio styles
-
-.checkbox label,
-.radio label {
-  padding-left: 0;
-}
 .checkbox-icon {
   width: $line-height-size-base;
   height: $line-height-size-base;
@@ -531,82 +435,13 @@
     opacity: 1;
   }
 }
-
-// Card component
-
-.card {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  position: relative;
-  &:before {
-    content: '';
-    height: 1px;
-    position: absolute;
-    background-color: $grey-200;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-  &:last-child:after {
-    bottom: 0;
-    top: unset;
-    @extend .divider-lg:before;
-  }
+.nav-tabs > li > a {
+  color: $grey-600;
 }
-
-//Custom
-.desc {
-  min-height: 150px;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
-
-footer {
-  flex: none;
-}
-
-header {
-  flex: none;
-}
-
-input#cvv {
-  -webkit-text-security: disc; 
-}
-
-.fa-minus {
-   &:hover {
-    color: black;
-  }
-}
-
-.not-active {
-   pointer-events: none;
-   cursor: default;
-}
-
-.fa-plus {
-   &:hover {
-    color: black;
-  }
-}
-
-#new_order_item {
-  display: inline;
-}
-.categories-list {
-  li.active a {
-    color: black
-  }
+.media {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-top: 0;
 }
 
 @media (min-width: $grid-float-breakpoint) {

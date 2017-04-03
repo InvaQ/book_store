@@ -1,20 +1,16 @@
-.general-text-align.mb-60
-  %p.in-gold-500.font-18 Order Summary
-  %table.general-summary-table.general-summary-table-right.general-text-align.mb-60
-    %tbody
-      %tr
-        %td
-          %p.font-16=presenter.show_subtotal_cart_price          
-        %tr
-          %td
-
-            %p.font-16= presenter.show_coupon_info
-        %tr
-          %td
-            %p.font-16= presenter.show_delivery_info
-
-
-      %tr      
-        %td
-          %strong#order_subtotal.font-18
-            = presenter.show_total_cart_price
+%table.general-summary-table.general-summary-table-right.general-text-align.mb-60
+  %tr
+    %td
+      %p.in-gold-500.font-18 Order Summary
+  %tr
+    %td
+      %p.font-16=presenter.show_subtotal_cart_price          
+  %tr
+    %td
+      %p.font-16= presenter.show_coupon_info
+  %tr
+    %td
+      %p.font-16= presenter.show_delivery_info
+  %tr      
+    %td
+      %strong#order_subtotal.font-18= presenter.show_total_cart_price

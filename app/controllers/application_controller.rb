@@ -7,15 +7,15 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :set_i18n_locale_from_params
-  before_action :set_category  
+  before_action :set_categories  
   before_action :set_order
 
 
 
   protected
 
-  def set_category
-    @category = Category.get_first_listed
+  def set_categories
+    @categories = Category.get_first_listed
   end
 
 

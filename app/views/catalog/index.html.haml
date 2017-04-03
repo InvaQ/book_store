@@ -2,26 +2,31 @@
   %h1.general-title-margin Сatalog
   .hidden-xs.clearfix
     .pull-right
-      .dropdown.width-240
-        %a.dropdown-toggle.dropdown-btn{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-          Newest first
+      .dropdown
+        %a.dropdown-toggle.dropdown-btn{class: "width-240", href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+          = @current_filter
           %i.fa.fa-angle-down.dropdown-icon
         %ul.dropdown-menu
           %li
-            =sort_link("created_at", "desc", "Newest first")
+            = link_to "A - Z", catalog_index_path(sort_type: :title_asc)
           %li
-            %a{href: "#"} Popular first
+            = link_to "Z - A", catalog_index_path(sort_type: :title_desc)
           %li
-            =sort_link("price", "desc", "Price: Hight to low")
+            = link_to "Newest first", catalog_index_path(sort_type: :newest)
           %li
-            =sort_link("price", "asc", "Price: Low to hight")
+            = link_to "Popular first", catalog_index_path(sort_type: :popular)
+          %li
+            = link_to "Price: high to low", catalog_index_path(sort_type: :high_price)
+          %li
+            = link_to "Price: low to high", catalog_index_path(sort_type: :low_price)
+            
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         %a.filter-link{href: catalog_index_path}
           All
           %span.badge.general-badge 
             =Book.count
-      - @category.each do |category|
+      - @categories.each do |category|
         %li.mr-35
           %a.filter-link{href: catalog_path(category)}
             = category.name
@@ -30,20 +35,6 @@
   .mb-40.visible-xs
     %p.in-grey-600.small.mb-10 Filter by category
     .dropdown.mb-20
-      %a.dropdown-toggle.dropdown-btn{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        Newest first
-        %i.fa.fa-angle-down.dropdown-icon
-      %ul.dropdown-menu
-        %li
-          %a{href: "#"} Newest first
-        %li
-          %a{href: "#"} Popular first
-        %li
-          %a{href: "#"} Price: Low to hight
-        %li
-          %a{href: "#"} Price: Low to hight
-    %p.in-grey-600.small.mb-10 Sort by
-    .dropdown
       %a.dropdown-toggle.dropdown-btn{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         Newest first
         %i.fa.fa-angle-down.dropdown-icon

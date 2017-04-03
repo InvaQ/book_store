@@ -33,7 +33,14 @@ end
 
 ['USA', 'Ukraine', 'Germany', 'Malta', "Australia", 'Russia', 'Japan'].each do |name|
   country = Country.create!(name: name)
+
   Delivery.create!(name: "#{name}_post") do |delivery|
+    delivery.country = country
+    delivery.price = rand(5..30)
+    delivery.min_days = rand(2..7)
+    delivery.max_days = rand(7..30)
+  end
+  Delivery.create!(name: "Ups") do |delivery|
     delivery.country = country
     delivery.price = rand(5..30)
     delivery.min_days = rand(2..7)
