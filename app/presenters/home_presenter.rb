@@ -2,7 +2,7 @@ class HomePresenter < Rectify::Presenter
 
 
   def show_bestsellers
-    Book.joins('LEFT JOIN line_items ON line_items.book_id = books.id')
+    Book.joins('LEFT JOIN line_items ON line_items.book_id = books.id').includes(:pictures, :authors)
     .group('books.id').order('count(line_items.book_id) desc').take(4)
   end
 

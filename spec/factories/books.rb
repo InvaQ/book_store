@@ -9,25 +9,36 @@ FactoryGirl.define do
     width 100
     depth 47
     publication { rand(1990..2017) }
-    price { rand(10..30) }
+    price 10.99
     materials   { FFaker::Lorem.words.join ', ' }
     
-    trait :with_authors do
+    factory :book_with_authors do
       transient do
-        number_of_authors :rand
+        authors_count 2
+      end
+      after(:create) do |book, evaluator|
+        create_list(:author, evaluator.authors_count, books: [book])
       end
     end
     
-
-    trait :with_orders do
+    factory :book_with_line_items do
       transient do
-        amount_of_orders 1
+        lines_count 1
       end
-
-      after(:create) do |book, value|
-        create_list :line_item, value.amount_of_orders, book: book
+      after(:create) do |book, evaluator|
+        create_list(:line_item, evaluator.lines_count, book: book)
       end
     end
-  end
+
+  #   trait :with_orders do
+  #     transient do
+  #       amount_of_orders 1
+  #     end
+
+  #     after(:create) do |book, value|
+  #       create_list :line_item, value.amount_of_orders, book: book
+  #     end
+  #   end
+   end
   
 end

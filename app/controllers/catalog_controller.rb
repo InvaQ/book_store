@@ -3,8 +3,8 @@ class CatalogController < ApplicationController
   before_action :get_last_url, only: [:index, :show]
 
   def index
-    @books = Book.page(params[:page] || 1).per(4)    
-      .order("#{sort_column} #{sort_direction}")
+    binding.pry
+    @books = Book.order("#{sort_column} #{sort_direction}").page(params[:page] || 1).per(4)
 
     respond_to do |format|
       format.html
@@ -13,8 +13,7 @@ class CatalogController < ApplicationController
   end
 
   def show    
-    @books = Category.find(params[:id]).books
-      .order("#{sort_column} #{sort_direction}")
+    @books = Category.find(params[:id]).books.order("#{sort_column} #{sort_direction}").page(params[:page] || 1).per(4)
   end
   
 

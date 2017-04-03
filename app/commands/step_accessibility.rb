@@ -7,7 +7,7 @@ class StepAccessibility < Rectify::Command
 
   def call
     return broadcast(:wrong_url) if pointless_request?
-    return broadcast(:empty_cart) if @order.line_items.empty?     
+    return broadcast(:empty_cart) if order_empty?
     allowed_step? ? broadcast(:ok) : broadcast(:not_allowed)
   end
 
@@ -39,6 +39,10 @@ class StepAccessibility < Rectify::Command
 
   def pointless_request?
     @order.state == 'complete' && @step != :complete 
+  end
+
+  def order_empty?
+    @order.line_items.empty?
   end
 
 end

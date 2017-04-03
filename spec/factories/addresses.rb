@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :address, class: 'Address' do
-    country
     first_name { FFaker::Name.first_name }
     last_name  { FFaker::Name.last_name }
     city       { FFaker::AddressUS.city }
-    street     { FFaker::AddressUS.street_address }
+    address     { FFaker::AddressUS.street_address }
     zip        { FFaker::AddressUS.zip_code.to_i }
     phone      { FFaker.numerify('+12345678') }
 

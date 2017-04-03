@@ -15,4 +15,7 @@ RSpec.describe Delivery, type: :model do
       expect(subject.valid?).to eq false
     end
   end
+  it 'should show info aboute transfer' do
+    expect(FactoryGirl.build(:delivery).transfer).to eq("from 3 to 9 days")
+  end
 end

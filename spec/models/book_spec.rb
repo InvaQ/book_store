@@ -14,6 +14,7 @@ RSpec.describe Book, type: :model do
       it ' title not unique' do
         expect(FactoryGirl.build :book, title: book.title).not_to be_valid
       end
+    end
   end
 
     context 'associations' do
@@ -23,5 +24,13 @@ RSpec.describe Book, type: :model do
       it { should have_many(:categorizations) }
       it { should have_many(:line_items) }
     end
-  end
+
+    it ' should get books dimentsions' do
+      expect( book.get_book_dimensions).to eq("H:#{book.height}\" x W: #{book.width}\" x D: #{book.depth}\"")
+    end
+
+    it 'should show authors names' do
+      expect(FactoryGirl.create(:book_with_authors).get_author_names)
+        .to eq("author_first1 author_second1, author_first2 author_second2")
+    end
 end

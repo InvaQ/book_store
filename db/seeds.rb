@@ -1,7 +1,7 @@
 require 'ffaker'
 
 [LineItem, Book, Author, Picture, Category, Country, User, Coupon, Delivery ].each do |klass|
-  klass.delete_all
+  klass.all.each { |r| r.destroy }
 end
 
 User.create!(email: 'admin@test.com', password: 'Testtest00', admin: true)

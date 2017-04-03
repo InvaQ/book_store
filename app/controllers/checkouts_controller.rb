@@ -64,15 +64,18 @@ class CheckoutsController < ApplicationController
       end
 
       present OrderSummaryPresenter.new(order: @order)
-      end_checkout if @order.complete?
+      end_checkout if complete?
       render_wizard
     end
 
     def end_checkout      
         session[:order_id]=nil
         @order = Order.create
-        session[:order_id] = @order.id
-     
+        session[:order_id] = @order.id     
+    end
+
+    def complete?
+      @order.complete?
     end
 
  

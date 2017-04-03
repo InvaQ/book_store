@@ -45,7 +45,7 @@ class Order < ApplicationRecord
     end
 
     event :canceling do
-      transitions from: [ :creating, :delivery, :payment, :confirm, :complete, :in_transit ], to: :canceled
+      transitions from: [ :creating, :steps, :complete, :confirm, :complete, :in_transit ], to: :canceled
     end
 
   end
@@ -70,7 +70,7 @@ class Order < ApplicationRecord
   end
 
   def subtotal_cart_price
-    self.line_items.inject(0) do |sum, line|
+    line_items.inject(0) do |sum, line|
       sum + line.total_price
     end
   end

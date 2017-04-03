@@ -19,11 +19,6 @@ class Review < ApplicationRecord
 
   end
 
-
-  def self.get_states
-    aasm.states.map(&:name)
-  end
-
   def published_at
     created_at.strftime('%d/%m/%y')
   end

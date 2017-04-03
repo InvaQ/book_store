@@ -7,16 +7,25 @@ FactoryGirl.define do
     email {FFaker::Internet.email}
     password 'Testtest00'
     password_confirmation 'Testtest00'
-     confirmed_at Date.today
+    #confirmed_at Date.today
 
     factory :admin do
-      is_admin true
+      admin true
     end
 
-    trait :with_addresses do
+    factory :user_with_addresses do
       after(:create) do |user|
         create(:billing_address, addressable: user)
         create(:shipping_address, addressable: user)
+      end
+    end
+
+    trait :for_verified_review do
+      transient do
+        amount_of_orders 1
+      end
+      after(:create) do |user, evaluator|
+        create_list(:order_with_item_verified, evaluator.amount_of_orders, user: user, state: 'delivered')
       end
     end
     

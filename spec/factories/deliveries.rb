@@ -5,6 +5,6 @@ FactoryGirl.define do
     name { generate :delivery_title }
     min_days 3
     max_days 9
-    price    { FFaker.numerify('#.##') } 
+    price    20.00
   end
 end

@@ -11,8 +11,7 @@ class UpdateCart < Rectify::Command
       get_coupon_form
       return broadcast(:invalid, form) if form.invalid?
     end
-    action = params[:to_checkout] ? :to_checkout : :update_cart
-    order.checkout if action == :to_checkout
+    define_action
     broadcast(action) if update_cart
   end
 
@@ -41,6 +40,11 @@ private
 
   def cart_params
     params.require(:order).permit(line_items_attributes: [:id, :quantity])
+  end
+
+  def define_action
+    action = params[:to_checkout] ? :to_checkout : :update_cart
+    order.checkout if action == :to_checkout
   end
 
 
