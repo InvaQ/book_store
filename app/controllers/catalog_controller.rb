@@ -20,7 +20,7 @@ class CatalogController < ApplicationController
 
   def set_sort_type
     session[:sort_type] =
-      params[:sort_type] ? params[:sort_type] : session[:sort_type]
+      params[:sort_type] || session[:sort_type] || :title_asc
   end
 
   def define_current_filter_title(filter)
