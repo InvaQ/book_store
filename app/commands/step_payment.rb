@@ -1,7 +1,7 @@
 class StepPayment < Rectify::Command
 
 def initialize(params, object)
-  @params = params[:order].permit!
+  @params = params[:order]
   @order = object
   
 end
@@ -15,9 +15,10 @@ def call
 end
 
  private
+  attr_reader :params
 
   def add_to_order
-      @order.credit_card != nil ? update_card : add_card
+    @order.credit_card ? update_card : add_card
   end
 
   def update_card
@@ -35,7 +36,11 @@ end
   end
 
   def set_form
-    @form = CreditCardForm.from_params(@params)
+    @form = CreditCardForm.from_params(card_params)
+  end
+
+  def card_params
+    params.require(:credit_card).permit(:number, :name, :expiry_month, :expiry_year, :cvv)
   end
 
 end

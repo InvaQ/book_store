@@ -11,7 +11,7 @@ class StepAddress < Rectify::Command
     check_billing_params
     @shipping_params = 
       use_billing? ? @billing_params.dup : @shipping_params
-    return broadcast(:invalid,  @billing_params, @shipping_params) if forms_valid?
+    return broadcast(:invalid,  @billing_params, @shipping_params) if forms_invalid?
     broadcast(:ok, @order) if change_address
   end
 
@@ -43,7 +43,7 @@ class StepAddress < Rectify::Command
     @use_billing == "on"
   end
 
-  def forms_valid?
+  def forms_invalid?
     @shipping_params.invalid? && @billing_params.invalid?
   end
 

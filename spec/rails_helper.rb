@@ -10,6 +10,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'rspec/rails'
+require 'wisper'
 
 require 'capybara/rspec'
 require 'capybara/rails'
@@ -38,34 +39,20 @@ require 'aasm/rspec'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
   #config.include Devise::Test::ControllerHelpers, type: :view
   config.include Warden::Test::Helpers
-  config.include Rectify::RSpec::Helpers
+  config.include Rectify::RSpec::Helpers  
+  config.include(Wisper::RSpec::BroadcastMatcher)
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
+  
+  #config.use_transactional_fixtures = true
 
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, :type => :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://relishapp.com/rspec/rspec-rails/docs
+  
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
@@ -76,17 +63,11 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = false
   config.before(:suite) do
-  # This says that before the entire test suite runs, clear the test database out completely.
-  # This gets rid of any garbage left over from interrupted or poorly-written tests - a common source of surprising test behavior.
   DatabaseCleaner.clean_with(:truncation)
 
-  # This part sets the default database cleaning strategy to be transactions.
-  # Transactions are very fast, and for all the tests where they do work - that is, any test where the entire test runs in the RSpec process - they are preferable.
   DatabaseCleaner.strategy = :transaction
   end
 
-  # These lines hook up database_cleaner around the beginning and end of each test,
-  # telling it to execute whatever cleanup strategy we selected beforehand.
   config.before(:each) do
     DatabaseCleaner.start
   end

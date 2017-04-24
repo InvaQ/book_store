@@ -1,10 +1,13 @@
 FactoryGirl.define do
-  sequence :delivery_title { |n| "Delivery#{n}" }
-
   factory :delivery do
-    name { generate :delivery_title }
+    name 'Post'
     min_days 3
     max_days 9
     price    20.00
+    
+    before(:create) do |delivery|
+      delivery.country = create(:country)
+      delivery.save
+    end
   end
 end

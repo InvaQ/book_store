@@ -56,6 +56,9 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'wisper-rspec'
+  gem 'pry-byebug'
+  gem 'pry-rails'
   
   
 end
@@ -64,11 +67,10 @@ group :test do
   #gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
+  gem 'wisper-rspec'
 end
 
 group :development do
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

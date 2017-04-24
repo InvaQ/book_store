@@ -6,5 +6,4 @@ class LineItemsController < ApplicationController
     @line_item.destroy if @line_item
     redirect_to cart_path
   end
- 
 end

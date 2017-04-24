@@ -2,6 +2,15 @@ FactoryGirl.define do
 
 
   factory :order do
+    total_price 8.00
+
+    trait :completed do
+      after(:create) do |order|
+        order.state = 'complete'
+        order.save
+      end
+      
+    end
 
     trait :with_items do
       transient do
