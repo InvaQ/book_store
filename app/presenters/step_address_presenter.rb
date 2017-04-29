@@ -18,7 +18,6 @@ class StepAddressPresenter < Rectify::Presenter
   private
 
   def priority_address(type)
-    #binding.pry
     @order.public_send("#{type}_address") || @user.public_send("#{type}_address") || "#{type.capitalize}Address".constantize.new
   end
 

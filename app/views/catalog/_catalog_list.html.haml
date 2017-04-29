@@ -2,8 +2,7 @@
   .col-xs-6.col-sm-3
     .general-thumb-wrap
       .thumbnail.general-thumbnail
-        %img.img-shadow.general-thumbnail-img 
-          = image_tag(book.main_picture)
+        %img.img-shadow.general-thumbnail-img{src: book.main_picture}
         .thumb-hover
           .general-thumb-link-wrap
             %a.thumb-hover-link{href: book_path(book)}

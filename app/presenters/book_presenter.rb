@@ -35,7 +35,7 @@ class BookPresenter < Rectify::Presenter
 
   def show_count_of_reviews
     amount = show_reviews.count
-    amount == 0 ? 'There are no reviews yet. Be the first!' : "Reviews(#{amount})"
+    "Reviews(#{amount})"
   end
 
   def show_reviews    
@@ -50,9 +50,11 @@ class BookPresenter < Rectify::Presenter
     cookies['my_previous_url']
   end
     
-    def review_form
-      @review || ReviewForm.new
-    end
+  def review_form
+    @review || ReviewForm.new
+  end
+
+  
 
   
 

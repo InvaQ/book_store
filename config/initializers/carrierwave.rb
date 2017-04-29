@@ -8,3 +8,10 @@ if Rails.env.production?
   config.dropbox_access_type         = "dropbox"
   end
 end
+
+# if Rails.env.development?
+#   CarrierWave.configure do |config|
+#     config.root = Rails.root
+#   end
+
+# end

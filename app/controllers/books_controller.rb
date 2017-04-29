@@ -11,7 +11,7 @@ class BooksController < ApplicationController
 
   end
 
-  def update    
+  def update
     PostReview.call(@book, current_user, review_params) do
       on(:ok) do
         redirect_to book_path, notice: "Thanks for Review. It will be published as soon as Admin will approve it."

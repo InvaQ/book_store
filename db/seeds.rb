@@ -20,16 +20,12 @@ Category.create!(name: 'Web Design')
 
 Book.all.each_with_index do |book, index|
   book.authors.create!(first_name: FFaker::Name.first_name,last_name: FFaker::Name.last_name)
-  book.categories << Category.find(rand(1..3)) 
-  4.times do 
+  book.categories << Category.find(rand(1..3))
+  book.pictures.create!(image_url: File.open("app/assets/images/fallback/#{rand(1..11)}.jpg"))
+  3.times do 
     book.pictures << Picture.create
   end
-  buffer = book.pictures[0]
-  buffer.image_url = ImageUploader.new.additional_default_url
-  buffer.save
-
 end
-
 
 ['USA', 'Ukraine', 'Germany', 'Malta', "Australia", 'Russia', 'Japan'].each do |name|
   country = Country.create!(name: name)

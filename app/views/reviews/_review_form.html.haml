@@ -4,7 +4,7 @@
   .form-group
     = f.input :rate, class: '' do
       .rate-fields
-        -5.downto(1).each do |star|
+        -(1..5).each do |star|
           = f.radio_button :rate, star,  class: 'input-star',id: "rate_#{star}"
           %label.label-star{ for: "rate_#{star}" }
             %i.fa.fa-star.rate-empty

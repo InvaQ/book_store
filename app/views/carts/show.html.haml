@@ -6,7 +6,9 @@
       .general-order-wrap
         .row
           .col-sm-4
-          %h1.general-title-margin Cart is empty, You can add book here
+          %h1.general-title-margin
+            Cart is empty, You can add book  
+            =link_to 'here', root_path
     -else
       =simple_form_for @order, url: cart_path, method: :patch do |f|
         =render 'table', field: f

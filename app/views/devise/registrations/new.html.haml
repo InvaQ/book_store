@@ -1,6 +1,9 @@
 %main.container.general-main-wrap
   .text-center
     %h3.general-login-title Sign up
+    = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
+      %i.fa.fa-facebook-official
+    %p.general-login-text or
   .general-form
     =form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = devise_error_messages!
@@ -13,6 +16,9 @@
       .form-group.mb-30 
         =f.label 'Confirm Password', class: 'control-label font-weight-light'
         =f.password_field :password_confirmation, autocomplete: "off",  placeholder: "Confirm Password", class: 'form-control'
-      .form-group.mb-30 
-        =f.submit "Sign up", class: 'btn btn-default mb-20'
-      =link_to 'Back to Store', root_path, class: 'btn btn-default mb-20'
+      .form-group.mb-30.text-center 
+        =f.submit "Sign up", class: 'btn btn-default mb-20 '
+  %p.general-sign-text.text-center
+    Have an Account?
+    = link_to "Log in", new_session_path(resource_name), class: 'in-gold-500'
+      
