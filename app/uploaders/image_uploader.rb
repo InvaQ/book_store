@@ -4,11 +4,12 @@ class ImageUploader < CarrierWave::Uploader::Base
    # process resize_to_limit: [300, 300]
    process convert: 'jpg'
   
-  if Rails.env.production?
-    storage :dropbox
-  else
-    storage :file
-  end
+  # if Rails.env.production?
+  #   storage :dropbox
+  # else
+  #   storage :file
+  # end
+  storage :file
  
   
   def store_dir
