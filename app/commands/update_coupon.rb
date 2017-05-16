@@ -18,7 +18,7 @@ class UpdateCoupon < Rectify::Command
     end
 
     def use_coupon!
-      @order.coupon = Coupon.find_by_code(params[:code])
+      @order.coupon ||= Coupon.find_by_code(params[:code])
     end
 
 	end

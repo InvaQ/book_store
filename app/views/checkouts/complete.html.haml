@@ -24,6 +24,9 @@
   .visible-xs
   .hidden-xs.divider-lg.pt-20
     =render 'carts/table', line_items: @complete_presenter.line_items
-  = render 'orders/order_summary'
+  .res-mr-200.text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render 'orders/order_summary'
   .text-center
     =link_to 'Back to Store', root_path, class: 'btn btn-default mb-20'

@@ -1,14 +1,13 @@
 class BooksController < ApplicationController
   include Rectify::ControllerHelpers
   load_and_authorize_resource only: [ :show, :update]
-  
+  skip_before_action :clean_last_url
   def index
   
   end
 
   def show    
     render_with_presenter
-
   end
 
   def update
@@ -36,7 +35,8 @@ private
 
   def render_with_presenter(review = nil)
     @presenter =  BookPresenter.new(@book, review)
-    @previous_path = cookies['my_previous_url']
+    @previous_path = 
+      cookies['my_previous_url'].present? ? cookies['my_previous_url'] : :back
   end
 
   def book_params

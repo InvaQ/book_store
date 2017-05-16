@@ -44,6 +44,9 @@
   .visible-xs
   .hidden-xs.divider-lg.pt-20
     =render 'carts/table', line_items: @order.line_items
-  = render 'orders/order_summary'
+  .res-mr-200.text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render 'orders/order_summary'
   .text-center
     = button_to 'Place order', checkout_path, method: :patch, params: { order: { place_order: true } }, class: 'btn btn-default mb-20'

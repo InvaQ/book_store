@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_i18n_locale_from_params
   before_action :set_categories  
   before_action :set_order
+  before_action :clean_last_url
 
 
 
@@ -19,10 +20,9 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def fast_authenticate_user!#remove!
-    return if user_signed_in?
-    session['user_return_to'] = request.fullpath
-    redirect_to new_user_session_path
+  def clean_last_url
+     cookies['my_previous_url'] = nil
+    # binding.pry
   end
 
   def set_i18n_locale_from_params

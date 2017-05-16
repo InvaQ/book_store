@@ -12,11 +12,11 @@ class CouponForm < Rectify::Form
   end
 
   def exist_coupon?
-    errors.add(:code, "does not exist!") unless current_coupon
+    return errors.add(:code, "does not exist!") unless current_coupon
   end
 
   def activated_coupon?
-    
+    return unless errors.blank?
     errors.add(:code, "is out of date") if current_coupon.already_activated?
   end
 end

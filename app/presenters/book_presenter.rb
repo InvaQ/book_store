@@ -45,10 +45,6 @@ class BookPresenter < Rectify::Presenter
   def show_pictures
     book.pictures
   end
-
-  def previous_path
-    cookies['my_previous_url']
-  end
     
   def review_form
     @review || ReviewForm.new

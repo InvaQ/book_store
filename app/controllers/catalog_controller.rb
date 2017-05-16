@@ -1,7 +1,7 @@
 class CatalogController < ApplicationController
   include Rectify::ControllerHelpers
   before_action :get_last_url, only: [:index, :show]
-  
+  skip_before_action :clean_last_url 
   def index
     sort_books
   end

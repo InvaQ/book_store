@@ -1,7 +1,7 @@
 %main.container
-  %a.general-back-link
-    %i.fa-long-arrow-left.mr-15
-    = link_to 'Back to results', @previous_path        
+  = link_to @previous_path, class: 'general-back-link' do  
+    %i.fa.fa-long-arrow-left.mr-15
+    Back to results
   .row
     .col-sm-6
       .product-gallery

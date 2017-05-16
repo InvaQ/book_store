@@ -1,16 +1,22 @@
-%table.general-summary-table.general-summary-table-right.general-text-align.mb-60
+%tr
+  %td
+    %p.font-16 Subtotal:
+  %td  
+    %p.font-16=presenter.show_subtotal_cart_price
+-if presenter.has_coupon?
   %tr
     %td
-      %p.in-gold-500.font-18 Order Summary
-  %tr
-    %td
-      %p.font-16=presenter.show_subtotal_cart_price          
-  %tr
+      %p.font-16 Coupon:
     %td
       %p.font-16= presenter.show_coupon_info
+-if presenter.has_delivery?
   %tr
     %td
-      %p.font-16= presenter.show_delivery_info
-  %tr      
+      %p.font-16 Delivery:
     %td
-      %strong#order_subtotal.font-18= presenter.show_total_cart_price
+      %p.font-16= presenter.show_delivery_info
+%tr
+  %td
+    %strong#order_subtotal.font-18 Total price: 
+  %td
+    %strong#order_subtotal.font-18= presenter.show_total_cart_price        
