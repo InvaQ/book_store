@@ -31,7 +31,7 @@ class CatalogController < ApplicationController
     set_sort_type
     define_current_filter_title(session[:sort_type])
     @books = SortBooks.call(@category, session[:sort_type])
-      .page(params[:page] || 1).per(4)
+      .page(params[:page] || 1).per(8)
   end
   
    

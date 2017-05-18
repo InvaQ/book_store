@@ -8,8 +8,7 @@
         -@presenter.show_pictures.each_with_index do |picture, index|
           -if index == 0
             .mb-20
-              .img-responsive
-                = image_tag(picture.image_url_url(:main))
+              %img.img-responsive.centered{src:picture.image_url_url(:main) }
           -else              
             %a.img-link                   
               = image_tag(picture.image_url_url)

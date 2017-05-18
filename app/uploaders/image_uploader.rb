@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
    include CarrierWave::MiniMagick
-   # process resize_to_limit: [300, 300]
+   process resize_to_limit: [300, 300]
    process convert: 'jpg'
   
   # if Rails.env.production?

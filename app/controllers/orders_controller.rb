@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
 
   def index
     SortOrders.call(params, current_user) do 
-      on(:ok) do |order|
-        present OrdersPresenter.new(order)
+      on(:ok) do |*attrs|
+        present OrdersPresenter.new(*attrs)
       end      
     end
   end

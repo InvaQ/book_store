@@ -7,7 +7,7 @@ class SortOrders < Rectify::Command
 
   def call    
     @filter = check_filter
-    broadcast(:ok, collect_orders(@filter))
+    broadcast(:ok, collect_orders(@filter), @filter)
   end
 
   private

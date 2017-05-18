@@ -22,8 +22,11 @@ Book.all.each_with_index do |book, index|
   book.authors.create!(first_name: FFaker::Name.first_name,last_name: FFaker::Name.last_name)
   book.categories << Category.find(rand(1..3))
   book.pictures.create!(image_url: File.open("public/seed_pic/#{index+1}.jpg"))
-  3.times do 
-    book.pictures << Picture.create
+end
+
+3.times do
+  (1..5).each do |id|
+    Book.find(id).pictures.create!(image_url: File.open("public/seed_pic/#{id+5}.jpg"))
   end
 end
 

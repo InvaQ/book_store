@@ -1,6 +1,8 @@
 class OrdersPresenter < Rectify::Presenter
-  def initialize(orders)
-    @orders = orders
+  def initialize(*attrs)
+    #binding.pry
+    @orders = attrs[0]
+    @filter = attrs[1]
   end
 
   def orders
@@ -11,7 +13,9 @@ class OrdersPresenter < Rectify::Presenter
     @orders.present?
   end
 
-  
+  def current_order_filter  
+    @filter || 'All'
+  end 
 
   
 end

@@ -4,7 +4,7 @@
   
   .dropdown.general-order-dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      All
+      =presenter.current_order_filter
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
       %li
@@ -45,5 +45,9 @@
                 %span.font-16.in-grey-900.font-weight-light=order.state.capitalize
               %td
                 %strong.font-16=number_to_currency(order.total_price)
+            %tr
+              %td
+                %h2
+
           
     
