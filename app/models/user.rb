@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_one :billing_address, as: :addressable, dependent: :destroy
   validates :email, :password, presence: true
   validates :email, format: {with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/iu }
-  validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}\z/}
+  #validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}\z/}
   #has_one :avatar, as: :imageable
 
   def self.from_omniauth(auth)

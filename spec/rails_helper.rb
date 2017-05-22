@@ -11,7 +11,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'rspec/rails'
 require 'wisper'
-
+require 'wisper/rspec/stub_wisper_publisher'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'shoulda/matchers'
@@ -49,6 +49,7 @@ RSpec.configure do |config|
   config.include(Wisper::RSpec::BroadcastMatcher)
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+  config.include ActionDispatch::TestProcess
   
   #config.use_transactional_fixtures = true
 

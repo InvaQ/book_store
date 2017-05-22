@@ -17,7 +17,9 @@ class CheckoutsController < ApplicationController
   def update
 
     "Step#{step.capitalize}".constantize.call(params, @order) do
-      on(:ok) { redirect_to next_wizard_path }
+      on(:ok) do |*attrs|
+        redirect_to after_edit_to_confirm(*attrs)
+      end
       on(:invalid) do |*attrs|  
         render_with_presenters(@order, *attrs)
       end
@@ -45,6 +47,7 @@ class CheckoutsController < ApplicationController
     end  
 
     def check_accessibility
+
       StepAccessibility.call(step, @order) do
         on(:wrong_url){ render_with_presenters(step: :complete) }
         on(:ok) {  render_with_presenters(@order) }
@@ -55,7 +58,6 @@ class CheckoutsController < ApplicationController
     end
 
     def render_with_presenters(*attrs)
-    
       case step
         when :address then @address_presenter = StepAddressPresenter.new(current_user, *attrs )
         when :confirm then @confirm_presenter = ConfirmPresenter.new(order: @order).attach_controller(self)
@@ -76,6 +78,10 @@ class CheckoutsController < ApplicationController
 
     def complete?
       @order.complete?
+    end
+
+    def after_edit_to_confirm(order)
+      order.confirm? ? wizard_path(:confirm) : next_wizard_path
     end
 
  

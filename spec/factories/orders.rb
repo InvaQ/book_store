@@ -50,6 +50,14 @@ FactoryGirl.define do
       end
     end
 
+    trait :already_confirm do
+      after(:create) do |order|
+        order.checkout
+        order.filling_payment
+        order.save
+      end
+    end
+
 
     factory :order_with_item_verified do
       after (:create) do |order|        
