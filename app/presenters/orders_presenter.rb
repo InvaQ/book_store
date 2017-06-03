@@ -1,6 +1,5 @@
 class OrdersPresenter < Rectify::Presenter
   def initialize(*attrs)
-    #binding.pry
     @orders = attrs[0]
     @filter = attrs[1]
   end

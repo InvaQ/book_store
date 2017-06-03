@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
   def clean_last_url
      cookies['my_previous_url'] = nil
-    # binding.pry
   end
 
   def set_i18n_locale_from_params
