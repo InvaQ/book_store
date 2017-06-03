@@ -66,7 +66,7 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     #domain: config.app_domain,
-    domain: 'https://calm-ravine-19746.herokuapp.com'    
+    domain: 'https://calm-ravine-19746.herokuapp.com',   
     user_name: ENV['gmail_username'],
     password: ENV['gmail_password'],
     authentication: 'plain',
