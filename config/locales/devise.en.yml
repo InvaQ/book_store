@@ -2,6 +2,17 @@
 
 en:
   devise:
+    fast_registrations:
+      user:
+        signed_up: "You signed up with quick registration, check your password at your email"
+      quick_registration:
+        title: 'New Customer'
+        message: 'Quick Register'
+        message_quick_registration: "You'll be able to create password later"
+      quick_session:
+        title: 'Returning Customer'
+        message: 'Log In With Password'
+        
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -60,3 +71,4 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+

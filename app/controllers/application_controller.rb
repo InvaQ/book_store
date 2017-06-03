@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def fast_authentication!
+    return if user_signed_in?
+    session['user_return_to'] = request.fullpath
+    redirect_to show_fast_registrations_path
+  end
+
   def set_categories
     @categories = Category.get_first_listed
   end

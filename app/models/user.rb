@@ -32,4 +32,14 @@ class User < ApplicationRecord
   end
 
 
+  def self.fast_registration(sign_up_params)
+    user = new sign_up_params
+    user.provider = 'fast'
+    user.password = Devise.friendly_token[0,20]
+    binding.pry
+    ApplicationMailer.send_password(user.email, user.password).deliver_now if user.save
+    user
+  end
+
+
 end

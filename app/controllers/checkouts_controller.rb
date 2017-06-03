@@ -1,7 +1,7 @@
 class CheckoutsController < ApplicationController
   include Wicked::Wizard
   include Rectify::ControllerHelpers
-  before_action :authenticate_user!  
+  before_action :fast_authentication!  
   steps :address, :delivery, :payment, :confirm, :complete
   #before_action :set_forms
   before_action :set_countries, :set_steps

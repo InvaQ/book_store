@@ -21,7 +21,7 @@ private
   end
 
   def send_email
-    ApplicationMailer.send_email(@order.user, @order)
+    ApplicationMailer.send_email(@order.user, @order).deliver_later
   end
 
   def confirm_params

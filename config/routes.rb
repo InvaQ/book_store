@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
-    
+  devise_scope :user do
+    get 'fast_registrations', to: 'fast_registrations#show', as: :show_fast_registrations
+    post 'fast_registrations', to: 'fast_registrations#quick_registration', as: :fast_registration
+
+  end
     
   scope "(:locale)", locale: /en|ru/ do  
     resources :orders
