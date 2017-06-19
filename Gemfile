@@ -2,12 +2,10 @@ source 'https://rubygems.org'
 ruby "2.4.0"
 
 gem 'rails', '~> 5.0.0'
-#gem 'sqlite3'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-# gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
@@ -42,16 +40,12 @@ gem 'dotenv-rails'
  gem 'carrierwave-dropbox'
  gem 'mini_magick'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  #gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'capybara'
@@ -64,7 +58,6 @@ group :development, :test do
 end
 
 group :test do
-  #gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
   gem 'wisper-rspec'
