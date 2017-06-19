@@ -1,0 +1,14 @@
+= simple_form_for @book, as: @presenter.review_form, id: 'review_form' do |f|
+  .form-group
+    = f.input :title, input_html: {value: current_user.email}
+  .form-group
+    = f.input :rate, class: '' do
+      .rate-fields
+        -(1..5).each do |star|
+          = f.radio_button :rate, star,  class: 'input-star',id: "rate_#{star}"
+          %label.label-star{ for: "rate_#{star}" }
+            %i.fa.fa-star.rate-empty
+  .form-group
+    = f.input :description, as: :text
+  .text-center.general-text-align
+    = f.button :submit, 'Save', class: "btn btn-default mb-35"

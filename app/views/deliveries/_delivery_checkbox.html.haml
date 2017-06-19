@@ -1,0 +1,5 @@
+%label.font-16.font-weight-light.pl-0
+  = radio_button_tag :delivery_id, delivery.id,@order.delivery_selected?( delivery.id), class: 'radio-input', hidden: true
+  %span.radio-icon
+  %span.radio-text= delivery.name
+ 

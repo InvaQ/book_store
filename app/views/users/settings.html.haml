@@ -1,0 +1,38 @@
+%main.container
+  %h1.general-title-margin= t('.settings_title')
+  %ul.nav.nav-tabs.mb-20{role: "tablist"}
+    %li.mb-10.active{role: "presentation"}
+      %a{href: "#address", 'aria-controls': "address", role: "tab", 'data-toggle': "tab"} Address
+    %li.mb-10{role: "presentation"}
+      %a{href: "#privacy", 'aria-controls': "privacy", role: "tab", 'data-toggle': "tab"} Privacy
+  .tab-content
+    #address.tab-pane.fade.in.active{role: "tabpanel"}
+      .general-main-wrap
+        .hidden-xs.hidden-sm
+          .row
+            .col-md-5
+              %h3.general-subtitle.mt-0 Billing Address
+            .col-md-5.col-md-offset-1
+              %h3.general-subtitle.mt-0 Shipping Address
+        .row
+          .col-md-5.mb-40
+            .visible-xs.visible-sm
+              %h3.general-subtitle.mt-0 Billing Address
+            =render 'address_form', object: presenter.billing, type: :billing
+          .col-md-5.mb-40.col-md-offset-1.mb-25
+            .visible-xs.visible-sm
+              %h3.general-subtitle.mt-0 Shipping Address
+            =render 'address_form', object: presenter.shipping, type: :shipping
+    -unless current_user.provider
+      #privacy.tab-pane.fade{role: "tabpanel"}
+        .row.mb-60
+          .col-sm-5
+            %p.in-gold-500.font-18.mb-25 Email
+            = render 'change_email'
+          .col-sm-5.col-sm-offset-1
+            %p.in-gold-500.font-18.mb-25 Password
+            = render 'change_password'
+          .col-sm-12
+            .divider-lg-bottom
+            %p.in-gold-500.font-18.mb-25 Remove Account
+            = render 'remove_account'

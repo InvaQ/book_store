@@ -1,0 +1,43 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    =@confirm_presenter.show_order_number
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle Shipping Address
+      %p.general-address
+        =@confirm_presenter.show_ship_name
+        %br
+        =@confirm_presenter.show_ship_address
+        %br
+        =@confirm_presenter.show_ship_city_zip
+        %br
+        =@confirm_presenter.show_ship_country
+        %br
+        =@confirm_presenter.show_ship_phone
+    .col-sm-3
+      %h3.general-subtitle Billing Address
+      %p.general-address
+        =@order.billing_address.first_name
+        %br
+        =@order.billing_address.address
+        %br
+        =@order.billing_address.city
+        %br
+        =@order.billing_address.country_id
+        %br
+        =@order.billing_address.phone
+    .col-sm-3
+      %h3.general-subtitle Shipments
+      %p.general-address
+        = @order.delivery.name
+        %br
+        = @order.delivery.transfer
+    .col-sm-3
+      %h3.general-subtitle Payment Information
+      %p.general-address
+        = @confirm_presenter.show_credit_card
+        %br
+        = @order.credit_card.expiry_year      
+  .hidden-xs.divider-lg.pt-20
+    =render 'carts/table', line_items: @order.line_items
+  = render 'orders/order_summary'

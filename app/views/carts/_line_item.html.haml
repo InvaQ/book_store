@@ -1,0 +1,28 @@
+%tr
+  %td
+    .general-img-wrap-table
+      =image_tag line_item.book.main_picture
+  %td
+    %p.general-title 
+      =line_item.book.title
+  %td
+    %span.font-16.in-gold-500 
+      =number_to_currency(line_item.book.price)
+  %td
+    %span.font-16.in-gold-500 
+      .input-group
+        - if local_assigns[:field]
+          %div.input-link
+            %i.glyphicon.glyphicon-minus.line-height-40{type: 'button', onclick: "decrementVal()"}
+          =field.text_field :quantity, value: line_item.quantity, class: 'form-control quantity-input', id: 'form_quantity'
+          %div.input-link
+            %i.glyphicon.glyphicon-plus.line-height-40{type: 'button', onclick: "incrementVal()"}
+        -else
+          =line_item.quantity
+  %td
+    %span.font-16.in-gold-500 
+      =number_to_currency(line_item.total_price)
+  - if local_assigns[:field]
+    %td
+      =link_to line_item_path(line_item), method: :delete, class: 'close general-cart-close' do    
+        %span{'aria-hidden': "true"} &times;

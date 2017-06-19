@@ -1,0 +1,10 @@
+= form_for(object, url: create_line_item_book_path, method: :post) do |f|
+  .col-xs-5.col-md-3
+    .input-group.general-position
+      %div.input-link
+        %i.glyphicon.glyphicon-minus.line-height-40{type: 'button', onclick: "decrementVal()"}
+      =f.text_field :quantity, value: 1, class: 'form-control quantity-input', id: "form_quantity"
+      %div.input-link
+        %i.glyphicon.glyphicon-plus.line-height-40{type: 'button', onclick: "incrementVal()"}
+  .col-xs-7.col-md-4
+    =f.submit 'Add to Cart', class: 'btn btn-default pull-right general-position'

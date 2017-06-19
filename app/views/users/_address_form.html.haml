@@ -1,0 +1,6 @@
+= simple_form_for current_user, url: update_address_path(current_user) do |f|
+  =f.simple_fields_for type, object do |item_field|
+    =render 'fields', field: item_field
+    .mb-40
+      .text-center.general-text-align
+        = f.button :submit, class: "btn btn-default mb-35"

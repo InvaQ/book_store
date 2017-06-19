@@ -1,0 +1,30 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin Cart
+  .visible-xs        
+  .hidden-xs
+    -if @order.line_items.empty?
+      .general-order-wrap
+        .row
+          .col-sm-4
+          %h1.general-title-margin
+            Cart is empty, You can add book  
+            =link_to 'here', root_path
+    -else
+      =simple_form_for @order, url: cart_path, method: :patch do |f|
+        =render 'table', field: f
+        .general-order-wrap
+          .row
+            .col-sm-4
+              = f.simple_fields_for :coupon, @coupon_form do |coupon|
+                .input-group.general-input-group
+                  .mb-30
+                    = coupon.input :code                
+              = f.submit 'Update cart', class: 'btn btn-primary mb-15 res-block'  
+            .col-sm-8
+              .res-mr-200.text-center.general-text-right
+                %p.in-gold-500.font-18 Order Summary
+                %table.general-summary-table.general-summary-table-right.general-text-right
+                  =render '/orders/order_summary'
+          .text-center
+            = f.submit 'checkout', name: :to_checkout, class: 'btn btn-default mb-20'
+

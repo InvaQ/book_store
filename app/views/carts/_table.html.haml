@@ -1,0 +1,21 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        %span.in-grey-600= t('carts.show.product')
+      %th.col-title
+      %th.col-price
+        %span.in-grey-600= t('carts.show.price')
+      %th
+        %span.in-grey-600= t('carts.show.quantity')
+      %th
+        %span.in-grey-600= t('carts.show.sub_total')      
+        %th.close-link
+  %tbody
+    - if local_assigns[:field]  
+      = field.simple_fields_for :line_items do |line|
+        = render 'line_item', line_item: line.object,
+            field: line
+    -else
+      -line_items.each do |line|
+        = render 'carts/line_item', line_item: line

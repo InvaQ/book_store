@@ -1,0 +1,40 @@
+%main.container
+  = render 'steps', steps: @steps
+  = simple_form_for @order, url: checkout_path, class: 'res-mb-100' do |field|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle.mt-0 Billing Address
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle.mt-0 Shipping Address
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0 Billing Address
+        = field.simple_fields_for :billing, @address_presenter.billing do |item_field|   
+          = render 'users/fields', field: item_field
+      .col-md-5.mb-40.col-md-offset-1.mb-25
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0 Shipping Address
+        #shipping_from{style: "display:#{session[:use_billing] ? 'none' : ''}"}
+          = field.simple_fields_for :shipping, @address_presenter.shipping do |item_field|
+            = render 'users/fields', field: item_field
+
+        .form-group.checkbox
+          %label.font-weight-light.pl-0
+            = check_box_tag :use_billing, nil, session[:use_billing], class: 'checkbox-input', hidden: 'hidden', id: 'use_billing'
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text use billing
+    .general-text-align.mb-60
+      %p.in-gold-500.font-18 Order Summary
+      %table.general-summary-tablet
+        = render 'orders/order_summary'
+    .col-md-12.mb-40
+      .text-center    
+        = field.submit 'Save and Continue', class: 'button btn btn-default mb-20'
+
+
+
+
+    

@@ -1,0 +1,20 @@
+- @books.each do |book|
+  .col-xs-6.col-sm-3
+    .general-thumb-wrap
+      .thumbnail.general-thumbnail
+        %img.img-shadow.general-thumbnail-img{src: book.pictures[0].image_url}
+        .thumb-hover
+          .general-thumb-link-wrap
+            %a.thumb-hover-link{href: book_path(book)}
+              %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+            =link_to create_line_item_book_path(id: book.id, book: {quantity: '1'}), method: :post, class: 'thumb-hover-link' do
+              %i.fa.fa-shopping-cart.thumb-icon
+
+    .general-thumb-info{"data-id" => book.id}
+      %p.general-title 
+        =truncate(book.title, length: 30)
+      %p.font-16.in-gold-500 
+        =number_to_currency(book.price)
+      %span.divider-sm
+      %p.in-grey-600.small
+        =book.get_author_names

@@ -1,0 +1,52 @@
+%main.container.general-main-wrap
+  = render 'steps', steps: @steps
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle Shipping Address
+      %p.general-address
+        =@confirm_presenter.show_ship_name
+        %span.general-edit= link_to t('edit'), checkout_path(:address)
+        %br
+        =@confirm_presenter.show_ship_address
+        %br
+        =@confirm_presenter.show_ship_city_zip
+        %br
+        =@confirm_presenter.show_ship_country
+        %br
+        =@confirm_presenter.show_ship_phone
+    .col-sm-3
+      %h3.general-subtitle Billing Address
+      %p.general-address
+        =@confirm_presenter.show_ship_name
+        %span.general-edit= link_to t('edit'), checkout_path(:address)
+        %br
+        =@confirm_presenter.show_ship_address
+        %br
+        =@confirm_presenter.show_ship_city_zip
+        %br
+        =@confirm_presenter.show_ship_country
+        %br
+        =@confirm_presenter.show_ship_phone
+    .col-sm-3
+      %h3.general-subtitle Shipments
+      %p.general-address
+        = @confirm_presenter.show_delivery_name
+        %span.general-edit= link_to 'edit', checkout_path(:delivery)
+        %br
+        = @confirm_presenter.show_delivery_transfer
+    .col-sm-3
+      %h3.general-subtitle Payment Information
+      %p.general-address
+        = @confirm_presenter.show_credit_card
+        %span.general-edit= link_to 'edit', checkout_path(:payment)
+        %br
+        = @order.credit_card.expiry_year
+  .visible-xs
+  .hidden-xs.divider-lg.pt-20
+    =render 'carts/table', line_items: @order.line_items
+  .res-mr-200.text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render 'orders/order_summary'
+  .text-center
+    = button_to 'Place order', checkout_path, method: :patch, params: { order: { place_order: true } }, class: 'btn btn-default mb-20'

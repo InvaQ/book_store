@@ -1,0 +1,32 @@
+%main.container.general-main-wrap
+  = render 'steps', steps: @steps
+  .text-center.mb-40
+    %h3.general-subtitle Thank You for your Order!
+    %p.font-weight-light=@complete_presenter.show_confirmation_detail
+  .row.mb-20
+    .col-sm-6
+      .visible-xs
+        %p.general-order-number.mb-0=@complete_presenter.show_order_number
+        %p.general-address.mb-30 October 29, 2016
+      %p.general-address
+        =@complete_presenter.show_ship_name
+        %br
+        =@complete_presenter.show_ship_address
+        %br
+        =@complete_presenter.show_ship_city_zip
+        %br
+        =@complete_presenter.show_ship_country
+        %br
+        =@complete_presenter.show_ship_phone
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0=@complete_presenter.show_order_number
+      %p.general-address.mb-30=@complete_presenter.show_order_date
+  .visible-xs
+  .hidden-xs.divider-lg.pt-20
+    =render 'carts/table', line_items: @complete_presenter.line_items
+  .res-mr-200.text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render 'orders/order_summary'
+  .text-center
+    =link_to 'Back to Store', root_path, class: 'btn btn-default mb-20'

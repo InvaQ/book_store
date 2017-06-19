@@ -1,0 +1,7 @@
+-[:first_name, :last_name, :address, :city, :zip].each do |string|
+  .form-group
+    =field.input string, id: "#{string}"
+.form-group
+  =field.input :country_id, collection: @countries,  id: 'country',  placeholder: "Select a country"
+.form-group.mb-60
+  =field.input :phone, id: "phone", type: "tel", placeholder: "Example +3556614567"

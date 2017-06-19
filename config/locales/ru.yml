@@ -1,0 +1,40 @@
+ru:
+  home:
+    index:
+      wellcome: Добро пожаловать в BookStore
+      home: Главная
+      shop: Магазин
+      best_sellers: Бестселлеры
+      account: Мой аккаунт
+      settings: Настройки
+      orders:
+        title: Заказы
+      buy_now: Купить сейчас
+      log_in: Войти
+      sign_up: Регистрация
+      log_out: Выйти
+  or: или
+  cancel: Отмена
+  confirm_intentions: Вы должны подтвердить свое намерение
+  success_updated: Данные успешно обновлены
+  privacy: Личные данные
+  address: Адрес
+  shipping_address: Адрес доставки
+  billing_address: Адрес оплаты
+  add_to_cart: Добавить в корзину
+  description: Описание
+  back_to_store: Назад в каталог
+  sure?: Вы уверены?
+  from: от
+  to: до
+  days: дней
+  edit: изменить
+  dashboard: Панель администратора
+  confirm_account: Подтвердить аккаунт
+  language:
+    
+    en: Английский
+    ru: Русский
+  users:
+      settings:
+        settings_title: Настройки

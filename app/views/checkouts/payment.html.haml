@@ -1,0 +1,27 @@
+%main.container.mb-res-50
+  =render 'steps', steps: @steps
+  %h3.general-subtitle Credit Card
+  = simple_form_for @order, url: checkout_path,html: { class: 'mb-80', id: 'credit_card_form' } do |field|
+    .max-600.mb-80
+      = field.simple_fields_for :credit_card, @payment_presenter.payment_form do |field|
+        .form-group
+          = field.input :number
+        .row
+          .col-sm-4
+            .form-group
+              = field.input :name
+          .col-sm-3
+            .form-group
+              = field.input :expiry_month
+          .col-sm-3
+            .form-group
+              = field.input :expiry_year    
+          .col-sm-2
+            .form-group.relative
+              = field.input :cvv
+    .general-text-align.mb-60
+      %p.in-gold-500.font-18 Order Summary
+      %table.general-summary-tablet
+        = render 'orders/order_summary'
+    .text-center
+      = field.submit 'Save and Continue', class: 'button btn btn-default mb-20'

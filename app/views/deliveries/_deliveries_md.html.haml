@@ -1,0 +1,20 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th.col-method
+        %span.in-grey-600.ml-40 Method
+      %th
+        %span.in-grey-600 Days
+      %th
+        %span.in-grey-600 Price
+
+  %tbody
+    - Delivery.where(country_id: @order.shipping_address.country_id).each do |delivery|
+      %tr
+        %td
+          .form-group.radio.mt-0.mb-0
+            = render 'deliveries/delivery_checkbox', delivery: delivery
+        %td
+          %span= delivery.transfer
+        %td
+          %span.font-16.in-gold-500.delivery-cost= number_to_currency(delivery.price)
